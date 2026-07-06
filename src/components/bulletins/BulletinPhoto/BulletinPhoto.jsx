@@ -1,22 +1,28 @@
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
+import Section from "@/components/ui/Section";
+import FileUpload from "@/components/ui/FileUpload";
+import { useState } from "react";
 
 function BulletinPhoto() {
+  const [preview, setPreview] = useState(null);
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
   return (
-    <Card
+    <Section
       title="Fotografía"
       subtitle="Suba una fotografía reciente."
     >
-      <div className="flex h-72 flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50">
-        <p className="mb-4 text-slate-500">
-          No hay fotografía seleccionada.
-        </p>
-
-        <Button>
-          Seleccionar fotografía
-        </Button>
-      </div>
-    </Card>
+      <FileUpload
+        label="Imagen de la persona"
+        preview={preview}
+        onChange={handleChange}
+      />
+    </Section>
   );
 }
 

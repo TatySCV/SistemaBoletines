@@ -10,10 +10,18 @@ export const recentBulletins = [
     id: 1,
     name: "Juan Pérez",
     date: "05/07/2026",
+    status: "Activo",
   },
   {
     id: 2,
     name: "María Soto",
     date: "05/07/2026",
+    status: "Pendiente",
+  },
+  {
+    id: 3,
+    name: "Pedro López",
+    date: "04/07/2026",
+    status: "Activo",
   },
 ];

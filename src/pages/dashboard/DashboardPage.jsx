@@ -1,8 +1,13 @@
+import WelcomeCard from "@/components/dashboard/WelcomeCard";
+import StatCard from "@/components/dashboard/StatCard";
+import RecentBulletins from "@/components/dashboard/RecentBulletins";
+
 import Card from "@/components/ui/Card";
 
-import RecentBulletins from "@/components/dashboard/RecentBulletins";
-import StatCard from "@/components/dashboard/StatCard";
-import WelcomeCard from "@/components/dashboard/WelcomeCard";
+import {
+  dashboardStats,
+  recentBulletins,
+} from "@/mocks/dashboard";
 
 function DashboardPage() {
   return (
@@ -12,27 +17,27 @@ function DashboardPage() {
       <div className="grid grid-cols-4 gap-6">
         <StatCard
           title="Boletines"
-          value="124"
+          value={dashboardStats.totalBulletins}
         />
 
         <StatCard
           title="Hoy"
-          value="5"
+          value={dashboardStats.todayBulletins}
         />
 
         <StatCard
           title="Usuarios"
-          value="3"
+          value={dashboardStats.totalUsers}
         />
 
         <StatCard
           title="Pendientes"
-          value="2"
+          value={dashboardStats.pendingBulletins}
         />
       </div>
 
       <Card title="Últimos boletines">
-        <RecentBulletins />
+        <RecentBulletins data={recentBulletins} />
       </Card>
     </div>
   );

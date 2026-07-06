@@ -1,22 +1,28 @@
-import { FaUserCircle } from "react-icons/fa";
+import Avatar from "@/components/ui/Avatar";
 
 function Topbar() {
   return (
-    <header className="flex h-[72px] items-center justify-between border-b bg-white px-8">
+    <header className="flex h-[72px] items-center justify-between border-b border-slate-200 bg-white px-8">
       <div>
-        <h2 className="text-2xl font-semibold text-slate-800">
+        <h1 className="text-2xl font-bold text-slate-800">
           Dashboard
-        </h2>
+        </h1>
+
+        <p className="text-sm text-slate-500">
+          Bienvenido al Sistema de Boletines
+        </p>
       </div>
 
       <div className="flex items-center gap-3">
-        <FaUserCircle
-          className="text-slate-600"
-          size={30}
+        <Avatar
+          src="https://i.pravatar.cc/100"
+          alt="Administrador"
         />
 
-        <div className="text-right">
-          <p className="font-medium">Administrador</p>
+        <div>
+          <p className="font-semibold">
+            Administrador
+          </p>
 
           <span className="text-sm text-slate-500">
             admin@pdi.cl

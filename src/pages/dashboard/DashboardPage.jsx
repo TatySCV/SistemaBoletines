@@ -1,3 +1,5 @@
+import Card from "@/components/ui/Card";
+
 import RecentBulletins from "@/components/dashboard/RecentBulletins";
 import StatCard from "@/components/dashboard/StatCard";
 import WelcomeCard from "@/components/dashboard/WelcomeCard";
@@ -29,7 +31,9 @@ function DashboardPage() {
         />
       </div>
 
-      <RecentBulletins />
+      <Card title="Últimos boletines">
+        <RecentBulletins />
+      </Card>
     </div>
   );
 }

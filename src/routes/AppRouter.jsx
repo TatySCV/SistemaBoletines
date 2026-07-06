@@ -12,7 +12,7 @@ import MainLayout from "@/layouts/MainLayout";
 
 import LoginPage from "@/pages/auth/LoginPage";
 import DashboardPage from "@/pages/dashboard/DashboardPage";
-import NewBulletinPage from "@/pages/bulletin/NewBulletinPage";
+import NewBulletinPage from "@/pages/bulletins/NewBulletinPage";
 import HistoryPage from "@/pages/history/HistoryPage";
 import UsersPage from "@/pages/users/UsersPage";
 import SettingsPage from "@/pages/settings/SettingsPage";

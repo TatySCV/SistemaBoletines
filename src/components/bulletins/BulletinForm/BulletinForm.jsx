@@ -1,24 +1,48 @@
-import BulletinBackground from "@/components/bulletins/BulletinBackground"
-import BulletinExpulsion from "@/components/bulletins/BulletinExpulsions"
-import BulletinObservations from "@/components/bulletins/BulletinObservations"
-import BulletinPersonalData from "@/components/bulletins/BulletinPersonalData"
-import BulletinPhoto from "@/components/bulletins/BulletinPhoto"
+import { FormProvider, useForm } from "react-hook-form";
+
+import defaultValues from "@/forms/bulletin/defaultValues";
+
+import BulletinPersonalData from "@/components/bulletins/BulletinPersonalData";
+import BulletinPhoto from "@/components/bulletins/BulletinPhoto";
+import BulletinExpulsion from "@/components/bulletins/BulletinExpulsions";
+import BulletinBackground from "@/components/bulletins/BulletinBackground";
+import BulletinObservations from "@/components/bulletins/BulletinObservations";
+
+import Button from "@/components/ui/Button";
 
 function BulletinForm() {
+  const methods = useForm({
+    defaultValues,
+    mode: "onBlur",
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <div className="space-y-8">
+    <FormProvider {...methods}>
+      <form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className="space-y-8"
+      >
+        <BulletinPersonalData />
 
-      <BulletinPersonalData />
+        <BulletinPhoto />
 
-      <BulletinPhoto />
+        <BulletinExpulsion />
 
-      <BulletinExpulsion />
+        <BulletinBackground />
 
-      <BulletinBackground />
+        <BulletinObservations />
 
-      <BulletinObservations />
-
-    </div>
+        <div className="flex justify-end">
+          <Button type="submit">
+            Generar Boletín
+          </Button>
+        </div>
+      </form>
+    </FormProvider>
   );
 }
 

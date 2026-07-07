@@ -1,7 +1,7 @@
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
-function BulletinExpulsion() {
+function BulletinExpulsions() {
   return (
     <Card
       title="Expulsiones"
@@ -14,4 +14,4 @@ function BulletinExpulsion() {
   );
 }
 
-export default BulletinExpulsion;
+export default BulletinExpulsions;

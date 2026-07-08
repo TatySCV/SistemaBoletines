@@ -2,6 +2,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useRef } from "react";
 
 import {
+  createBulletin,
+} from "@/services/bulletins";
+
+import {
   exportPosterJPG,
   exportPosterPDF,
 } from "@/utils/export/posterExport";
@@ -26,6 +30,55 @@ function BulletinEditor() {
 
   const bulletinData = methods.watch();
 
+async function handleSave() {
+
+
+  try {
+
+
+    const values =
+      methods.getValues();
+
+
+
+    const saved =
+      await createBulletin(
+        values
+      );
+
+
+
+    console.log(
+      "BOLETIN GUARDADO:",
+      saved
+    );
+
+
+
+    alert(
+      "Boletín guardado correctamente"
+    );
+
+
+
+  } catch (error) {
+
+
+    console.error(
+      error
+    );
+
+
+
+    alert(
+      "Error al guardar boletín"
+    );
+
+
+  }
+
+
+}
 
 
   return (
@@ -116,6 +169,23 @@ function BulletinEditor() {
                   Descargar JPG
 
                 </button>
+
+                <button
+  type="button"
+  onClick={handleSave}
+  className="
+  rounded-xl
+  bg-green-600
+  px-4
+  py-2
+  text-white
+  text-sm
+  "
+>
+
+  Guardar Boletín
+
+</button>
 
 
 

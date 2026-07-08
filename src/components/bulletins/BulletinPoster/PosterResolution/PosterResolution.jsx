@@ -140,7 +140,7 @@ function PosterResolution({
           icon={FaBuilding}
           title="SERVICIO QUE DICTA"
           value={
-            data.resolutionService
+            data.issuingService
           }
         />
 

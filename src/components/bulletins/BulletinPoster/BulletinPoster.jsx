@@ -1,168 +1,77 @@
+import PosterHeader from "./PosterHeader";
+import PosterPhoto from "./PosterPhoto";
+import PosterPersonalData from "./PosterPersonalData";
+import PosterSection from "./PosterSection";
+import PosterResolution from "./PosterResolution";
+import PosterTimeline from "./PosterTimeline";
+import PosterFlight from "./PosterFlight";
+import PosterFooter from "./PosterFooter";
+import PosterStatus from "./PosterStatus";
+
 function BulletinPoster({ data }) {
-
-
   return (
-
     <div
       className="
-      w-[500px]
-      min-h-[750px]
+      w-[794px]
+      min-h-[1123px]
       bg-white
-      border
-      shadow
-      p-6
+      overflow-hidden
+      shadow-xl
+      shrink-0
       "
     >
-
-
-      {/* TITULO */}
-
-      <h1
-        className="
-        text-center
-        text-xl
-        font-black
-        text-[#003B70]
-      "
-      >
-
-        EXPULSIÓN DE EXTRANJERO
-
-      </h1>
-
-
-
-
-
-      {/* DATOS PERSONALES */}
-
-      <section className="mt-6">
-
-
-        <h2 className="font-bold text-sm">
-
-          DATOS PERSONALES
-
-        </h2>
-
-
-        <p className="mt-2">
-
-          {
-            data.firstName ||
-            "Nombres"
-          }
-
-          {" "}
-
-          {
-            data.lastName ||
-            "Apellidos"
-          }
-
-        </p>
-
-
-        <p className="text-sm">
-
-          Nacionalidad:{" "}
-
-          {
-            data.nationality ||
-            "-"
-          }
-
-        </p>
-
-
-        <p className="text-sm">
-
-          Documento:{" "}
-
-          {
-            data.documentNumber ||
-            "-"
-          }
-
-        </p>
-
-
-      </section>
-
-
-
-
-
-      {/* INTERNACIONAL */}
-
-      {
-        data.hasInternationalRecord && (
-
-          <section className="mt-6">
-
-
-            <h2 className="font-bold text-sm">
-
-              ANTECEDENTES EN{" "}
-
-              {
-                data.internationalCountry
-                  ?.toUpperCase()
-              }
-
-
-            </h2>
-
-
-            <p className="text-sm mt-2">
-
-              {data.internationalRecord}
-
-            </p>
-
-
-          </section>
-
-        )
-      }
-
-
-
-
-
-      {/* CHILE */}
-
-      {
-        data.hasChileRecord && (
-
-          <section className="mt-6">
-
-
-            <h2 className="font-bold text-sm">
-
-              ANTECEDENTE PENAL EN CHILE
-
-            </h2>
-
-
-            <p className="text-sm mt-2">
-
-              {data.chileRecord}
-
-            </p>
-
-
-          </section>
-
-        )
-      }
-
-
+      <PosterHeader date={data.bulletinDate} />
+
+      <div className="p-5 space-y-5">
+        {/* FOTO + DATOS */}
+
+        <div
+          className="
+          grid
+          grid-cols-[300px_1fr]
+          gap-4
+          items-stretch
+          "
+        >
+          <PosterPhoto photo={data.photo} />
+
+          <div className="space-y-4">
+            <PosterStatus status={data.resolutionStatus} />
+
+            <PosterPersonalData data={data} />
+          </div>
+        </div>
+
+        {data.hasInternationalRecord && (
+          <PosterSection title={`ANTECEDENTES EN ${data.internationalCountry}`}>
+            {data.internationalRecord}
+          </PosterSection>
+        )}
+
+        {data.hasChileRecord && (
+          <PosterSection title="ANTECEDENTE PENAL EN CHILE">
+            {data.chileRecord}
+          </PosterSection>
+        )}
+
+        <div
+          className="
+          grid
+          grid-cols-2
+          gap-5
+          "
+        >
+          <PosterResolution data={data} />
+
+          <PosterTimeline items={data.timeline} />
+        </div>
+
+        {data.hasFlight && <PosterFlight data={data} />}
+      </div>
+
+      <PosterFooter />
     </div>
-
   );
-
 }
-
 
 export default BulletinPoster;

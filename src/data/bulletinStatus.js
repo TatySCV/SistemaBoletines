@@ -1,15 +1,15 @@
 const bulletinStatus = [
   {
-    value: "vigente",
+    value: "EXPULSION VIGENTE",
     label: "Expulsión Vigente",
   },
   {
-    value: "cumplida",
+    value: "EXPULSION CUMPLIDA",
     label: "Expulsión Cumplida",
   },
   {
-    value: "revocada",
-    label: "Revocada",
+    value: "EXPULSION REVOCADA",
+    label: "Expulsión Revocada",
   },
 ];
 

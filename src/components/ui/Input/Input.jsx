@@ -1,14 +1,11 @@
 import clsx from "clsx";
+import { useFormContext } from "react-hook-form";
 
 function Input({
   label,
   name,
   type = "text",
   placeholder = "",
-  value,
-  onChange,
-  onBlur,
-  error,
   helperText,
   required = false,
   disabled = false,
@@ -17,6 +14,13 @@ function Input({
   rightIcon,
   className,
 }) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
+  const error = errors[name]?.message;
+
   return (
     <div className={clsx("flex flex-col gap-2", className)}>
       {label && (
@@ -25,7 +29,6 @@ function Input({
           className="text-sm font-medium text-slate-700"
         >
           {label}
-
           {required && (
             <span className="ml-1 text-red-600">*</span>
           )}
@@ -36,9 +39,9 @@ function Input({
         className={clsx(
           "flex h-11 items-center rounded-xl border bg-white px-3 transition-all",
           error
-            ? "border-red-500 focus-within:border-red-500"
+            ? "border-red-500"
             : "border-slate-300 focus-within:border-[#003B70]",
-          disabled && "cursor-not-allowed bg-slate-100"
+          disabled && "bg-slate-100"
         )}
       >
         {leftIcon && (
@@ -49,15 +52,12 @@ function Input({
 
         <input
           id={name}
-          name={name}
           type={type}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
           placeholder={placeholder}
           disabled={disabled}
           readOnly={readOnly}
-          className="w-full bg-transparent outline-none placeholder:text-slate-400"
+          className="w-full bg-transparent outline-none"
+          {...register(name)}
         />
 
         {rightIcon && (

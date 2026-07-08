@@ -1,26 +1,93 @@
 const defaultValues = {
-  firstName: "",
-  lastName: "",
-  document: "",
-  sex: "",
-  birthDate: "",
-  nationality: "",
+  // -----------------------------
+  // Información General
+  // -----------------------------
+
+  bulletinDate: "",
+
+  status: "vigente",
+
   photo: null,
-  expulsions: [
-  {
-    type: "",
-    date: "",
-    decree: "",
-    reason: "",
-  },
-],
-  antecedentes: [
-  {
-    type: "",
-    date: "",
-    description: "",
-  },
-],
+
+  // -----------------------------
+  // Datos Personales
+  // -----------------------------
+
+  firstName: "",
+
+  lastName: "",
+
+  nationality: "",
+
+  birthDate: "",
+
+  gender: "",
+
+  documentType: "",
+
+  documentNumber: "",
+
+  // -----------------------------
+  // Antecedente Internacional
+  // -----------------------------
+
+  hasInternationalRecord: false,
+
+  internationalCountry: "",
+
+  internationalRecord: "",
+
+  // -----------------------------
+  // Antecedente Penal Chile
+  // -----------------------------
+
+  hasChileRecord: false,
+
+  chileRecord: "",
+
+  // -----------------------------
+  // Resolución
+  // -----------------------------
+
+  resolutionNumber: "",
+
+  resolutionDate: "",
+
+  issuingService: "",
+
+  resolutionStatus: "",
+
+  // -----------------------------
+  // Línea de tiempo
+  // -----------------------------
+
+  timeline: [
+    {
+      date: "",
+      description: "",
+    },
+  ],
+
+  // -----------------------------
+  // Vuelo
+  // -----------------------------
+
+  airline: "",
+
+  flightNumber: "",
+
+  origin: "",
+
+  destination: "",
+
+  departure: "",
+
+  arrival: "",
+
+  // -----------------------------
+  // Observaciones
+  // -----------------------------
+
   observations: "",
 };
 

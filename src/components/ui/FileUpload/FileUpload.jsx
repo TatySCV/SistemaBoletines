@@ -1,53 +1,46 @@
-import { useRef } from "react";
-import Button from "@/components/ui/Button";
+import { useFormContext } from "react-hook-form";
 
 function FileUpload({
+  name,
   label,
-  onChange,
-  preview,
 }) {
-  const inputRef = useRef(null);
+  const { setValue, watch } = useFormContext();
 
-  const handleClick = () => {
-    inputRef.current?.click();
+  const file = watch(name);
+
+  const handleChange = (e) => {
+    const image = e.target.files[0];
+
+    if (!image) return;
+
+    setValue(name, image);
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      {label && (
-        <label className="text-sm font-medium text-slate-700">
-          {label}
-        </label>
+    <div className="space-y-2">
+
+      <label className="font-medium">
+
+        {label}
+
+      </label>
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleChange}
+      />
+
+      {file && (
+
+        <img
+          src={URL.createObjectURL(file)}
+          alt="preview"
+          className="mt-4 h-72 rounded-xl border object-cover"
+        />
+
       )}
 
-      <div className="flex h-72 flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50">
-        
-        {preview ? (
-          <img
-            src={preview}
-            alt="preview"
-            className="h-full w-full object-cover rounded-xl"
-          />
-        ) : (
-          <>
-            <p className="mb-4 text-slate-500">
-              No hay fotografía seleccionada
-            </p>
-
-            <Button onClick={handleClick}>
-              Seleccionar fotografía
-            </Button>
-          </>
-        )}
-
-        <input
-          ref={inputRef}
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={onChange}
-        />
-      </div>
     </div>
   );
 }

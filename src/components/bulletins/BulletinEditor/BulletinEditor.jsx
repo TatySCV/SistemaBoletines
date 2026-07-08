@@ -3,6 +3,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import defaultValues from "@/forms/bulletin/defaultValues";
 
 import BulletinForm from "../BulletinForm";
+import BulletinPoster from "../BulletinPoster";
+
 
 function BulletinEditor() {
 
@@ -12,34 +14,54 @@ function BulletinEditor() {
   });
 
 
+  const bulletinData = methods.watch();
+
+
   return (
+
     <FormProvider {...methods}>
 
+
       <div className="space-y-8">
+
 
         {/* HEADER */}
 
         <div>
+
           <h1 className="text-3xl font-bold text-slate-800">
+
             Nuevo Boletín
+
           </h1>
 
-          <p className="text-slate-500 mt-2">
+
+          <p className="mt-2 text-slate-500">
+
             Complete la información para generar el boletín.
+
           </p>
+
+
         </div>
+
+
 
 
         {/* EDITOR */}
 
-        <div className="
+        <div
+          className="
           grid
           grid-cols-1
-          xl:grid-cols-[1fr_600px]
           gap-8
-        ">
+          xl:grid-cols-[1fr_600px]
+        "
+        >
 
-          {/* FORMULARIO */}
+
+
+          {/* FORM */}
 
           <div>
 
@@ -48,14 +70,16 @@ function BulletinEditor() {
           </div>
 
 
-          {/* PREVIEW */}
 
-          <div className="
-            hidden
-            xl:block
-          ">
 
-            <div className="
+
+          {/* POSTER */}
+
+          <div className="hidden xl:block">
+
+
+            <div
+              className="
               sticky
               top-8
               rounded-2xl
@@ -63,29 +87,54 @@ function BulletinEditor() {
               bg-white
               p-5
               shadow-sm
-            ">
-
-              <h2 className="font-semibold mb-4">
-                Vista previa
-              </h2>
+            "
+            >
 
 
-              <div className="
-                flex
-                h-[800px]
-                items-center
-                justify-center
-                rounded-xl
-                bg-slate-100
-                text-slate-400
-              ">
+              <div className="mb-4">
 
-                Afiche aquí
+
+                <h2 className="font-semibold">
+
+                  Vista previa
+
+                </h2>
+
+
+                <p className="text-sm text-slate-500">
+
+                  El boletín se actualiza automáticamente.
+
+                </p>
+
 
               </div>
 
 
+
+
+              <div
+                className="
+                flex
+                justify-center
+                overflow-auto
+                rounded-xl
+                bg-slate-100
+                p-5
+              "
+              >
+
+                <BulletinPoster
+                  data={bulletinData}
+                />
+
+
+              </div>
+
+
+
             </div>
+
 
           </div>
 
@@ -97,7 +146,9 @@ function BulletinEditor() {
 
 
     </FormProvider>
+
   );
+
 }
 
 

@@ -1,62 +1,53 @@
+import { upper, formatGender, formatPosterDate } from "@/utils/formatters";
+
 import {
-  upper,
-  formatGender,
-  formatPosterDate,
-} from "@/utils/formatters";
+  FaUser,
+  FaGlobeAmericas,
+  FaCalendarAlt,
+  FaIdCard,
+  FaVenusMars,
+} from "react-icons/fa";
 
-function DataItem({
-  label,
-  value,
-}) {
+import PosterIcon from "../PosterIcon";
 
-
+function DataItem({ icon, label, value }) {
   return (
-
     <div
       className="
+      flex
+      gap-3
       border-b
       border-slate-300
-      pb-4
+      pb-3
       "
     >
+      {icon && <PosterIcon icon={icon} />}
 
-      <p
-        className="
-        text-base
-        font-black
-        text-[#001b4d]
-        "
-      >
+      <div>
+        <p
+          className="
+          text-sm
+          font-black
+          text-[#001b4d]
+          "
+        >
+          {label}
+        </p>
 
-        {label}
-
-      </p>
-
-
-      <p
-        className="
-        text-lg
-        font-bold
-        text-black
-        mt-1
-        "
-      >
-
-        {upper(value)}
-
-      </p>
-
-
+        <p
+          className="
+          text-lg
+          font-bold
+          "
+        >
+          {upper(value)}
+        </p>
+      </div>
     </div>
-
   );
-
 }
-
 function PosterPersonalData({ data }) {
-
   return (
-
     <section
       className="
       rounded-xl
@@ -65,7 +56,6 @@ function PosterPersonalData({ data }) {
       bg-white
       "
     >
-
       {/* HEADER */}
 
       <div
@@ -77,13 +67,8 @@ function PosterPersonalData({ data }) {
         font-black
         "
       >
-
         DATOS PERSONALES
-
       </div>
-
-
-
 
       {/* BODY */}
 
@@ -95,57 +80,42 @@ function PosterPersonalData({ data }) {
         p-5
         "
       >
+        <DataItem icon={FaUser} label="NOMBRES" value={data.firstName} />
 
-
-        <DataItem
-          label="NOMBRES"
-          value={data.firstName}
-        />
-
+        <DataItem icon={FaUser} label="APELLIDOS" value={data.lastName} />
 
         <DataItem
+          icon={FaGlobeAmericas}
           label="NACIONALIDAD"
           value={data.nationality}
         />
 
-
-
         <DataItem
-          label="APELLIDOS"
-          value={data.lastName}
+          icon={FaCalendarAlt}
+          label="FECHA NACIMIENTO"
+          value={formatPosterDate(data.birthDate)}
         />
 
-
-
         <DataItem
-  label="FECHA NACIMIENTO"
-  value={
-    formatPosterDate(
-      data.birthDate
-    )
-  }
-/>
-
-
-        <DataItem
+          icon={FaIdCard}
           label="TIPO DOCUMENTO"
           value={data.documentType}
         />
 
         <DataItem
+          icon={FaIdCard}
           label="NÚMERO DOCUMENTO"
           value={data.documentNumber}
         />
 
-
+        <DataItem
+          icon={FaVenusMars}
+          label="GÉNERO"
+          value={formatGender(data.gender)}
+        />
       </div>
-
-
     </section>
-
   );
-
 }
-
 
 export default PosterPersonalData;

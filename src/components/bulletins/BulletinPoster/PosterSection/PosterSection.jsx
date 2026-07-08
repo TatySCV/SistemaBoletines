@@ -1,9 +1,18 @@
+import {
+  FaExclamationTriangle,
+} from "react-icons/fa";
 
-import { upper } from "@/utils/formatters";
+
+import {
+  upper,
+} from "@/utils/formatters";
+
+
 function PosterSection({
   title,
   children,
 }) {
+
 
   return (
 
@@ -16,35 +25,42 @@ function PosterSection({
     >
 
 
-      {/* HEADER ROJO */}
-
       <div
         className="
         bg-red-600
         text-white
         px-5
-        py-2
+        py-3
+        flex
+        gap-3
+        items-center
         font-black
         "
       >
 
-        ⚠ {title}
+
+        <FaExclamationTriangle />
+
+
+        {upper(title)}
+
 
       </div>
 
 
 
-      {/* CONTENIDO */}
 
       <div
         className="
-        p-4
+        p-5
         text-sm
         leading-relaxed
         "
       >
 
-        {upper(children) || "-"}
+
+        {upper(children)}
+
 
       </div>
 

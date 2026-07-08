@@ -9,16 +9,23 @@ export function upper(value) {
 
 
 
+// FECHA FORMATO PDI
+// 2026-07-08 -> 08.JUL.026
 
 export function formatPosterDate(value) {
 
-
   if (!value) {
-
     return "--.---.---";
-
   }
 
+
+  const date =
+    new Date(value);
+
+
+  if (isNaN(date)) {
+    return value;
+  }
 
 
   const months = [
@@ -38,36 +45,6 @@ export function formatPosterDate(value) {
 
 
 
-  // viene desde input date: YYYY-MM-DD
-
-  if (
-    typeof value === "string" &&
-    value.includes("-")
-  ) {
-
-
-    const [
-      year,
-      month,
-      day,
-    ] = value.split("-");
-
-
-
-    return (
-      `${day}.${months[Number(month) - 1]}.${year.slice(-3)}`
-    );
-
-  }
-
-
-
-
-  const date =
-    new Date(value);
-
-
-
   const day =
     String(
       date.getDate()
@@ -83,6 +60,7 @@ export function formatPosterDate(value) {
     ];
 
 
+
   const year =
     String(
       date.getFullYear()
@@ -94,15 +72,12 @@ export function formatPosterDate(value) {
     `${day}.${month}.${year}`
   );
 
-
 }
 
 
 
 
-
 export function formatGender(value) {
-
 
   const genders = {
 
@@ -114,11 +89,83 @@ export function formatGender(value) {
 
 
   return (
-
     genders[value] ||
     value ||
     "-"
-
   );
+
+}
+
+export function formatPosterDateTime(value) {
+
+
+  if (!value) {
+    return "-";
+  }
+
+
+  const months = [
+    "ENE",
+    "FEB",
+    "MAR",
+    "ABR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AGO",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DIC",
+  ];
+
+
+
+  // datetime-local:
+  // 2026-07-04T23:05
+
+
+  if (value.includes("T")) {
+
+
+    const parts =
+      value.split("T");
+
+
+    const date =
+      parts[0];
+
+
+    const time =
+      parts[1];
+
+
+    const [
+      year,
+      month,
+      day,
+    ] =
+      date.split("-");
+
+
+
+    const [
+      hour,
+      minute,
+    ] =
+      time.split(":");
+
+
+
+    return (
+      `${day}.${months[Number(month) - 1]}.${year.slice(-3)}
+${hour}:${minute}`
+    );
+
+  }
+
+
+
+  return value;
 
 }

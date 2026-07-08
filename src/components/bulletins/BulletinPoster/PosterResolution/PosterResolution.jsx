@@ -1,9 +1,20 @@
 import {
+  FaClipboardList,
+  FaCalendarAlt,
+  FaBuilding,
+  FaCheckCircle,
+} from "react-icons/fa";
+
+import PosterIcon from "../PosterIcon";
+
+import {
   upper,
   formatPosterDate,
 } from "@/utils/formatters";
 
+
 function ResolutionItem({
+  icon,
   title,
   value,
 }) {
@@ -11,32 +22,50 @@ function ResolutionItem({
 
   return (
 
-    <div className="border-b pb-3">
+    <div
+      className="
+      flex
+      gap-3
+      border-b
+      pb-4
+      "
+    >
 
 
-      <p
-        className="
-        text-xs
-        font-black
-        text-[#001b4d]
-        "
-      >
-
-        {title}
-
-      </p>
+      <PosterIcon
+        icon={icon}
+      />
 
 
-      <p
-        className="
-        text-sm
-        font-medium
-        "
-      >
+      <div>
 
-        {upper(value) || "-"}
 
-      </p>
+        <p
+          className="
+          text-xs
+          font-black
+          text-[#001b4d]
+          "
+        >
+
+          {title}
+
+        </p>
+
+
+        <p
+          className="
+          text-sm
+          font-bold
+          "
+        >
+
+          {upper(value)}
+
+        </p>
+
+
+      </div>
 
 
     </div>
@@ -48,15 +77,17 @@ function ResolutionItem({
 
 
 
-function PosterResolution({ data }) {
+function PosterResolution({
+  data,
+}) {
 
 
   return (
 
     <section
       className="
-      rounded-xl
       overflow-hidden
+      rounded-xl
       border
       "
     >
@@ -66,52 +97,61 @@ function PosterResolution({ data }) {
         className="
         bg-[#001b4d]
         text-white
-        font-black
         px-5
         py-3
+        font-black
         "
       >
 
-        RESOLUCIÓN DE EXPULSIÓN
+        ⚖ RESOLUCIÓN DE EXPULSIÓN
 
       </div>
 
 
 
-      <div className="p-5 space-y-4">
+      <div
+        className="
+        p-5
+        space-y-5
+        "
+      >
 
 
         <ResolutionItem
+          icon={FaClipboardList}
           title="RESOLUCIÓN EXENTA N°"
+          value={data.resolutionNumber}
+        />
+
+
+        <ResolutionItem
+          icon={FaCalendarAlt}
+          title="FECHA RESOLUCIÓN"
           value={
-            data.resolutionRectified
-              ? `${data.resolutionNumber} (RECTIFICADA)`
-              : data.resolutionNumber
+            formatPosterDate(
+              data.resolutionDate
+            )
           }
         />
 
 
 
         <ResolutionItem
-  title="FECHA RESOLUCIÓN"
-  value={
-    formatPosterDate(
-      data.resolutionDate
-    )
-  }
-/>
-
-
-        <ResolutionItem
+          icon={FaBuilding}
           title="SERVICIO QUE DICTA"
-          value={data.issuingService}
+          value={
+            data.resolutionService
+          }
         />
 
 
 
         <ResolutionItem
+          icon={FaCheckCircle}
           title="ESTADO"
-          value={data.resolutionStatus}
+          value={
+            data.resolutionStatus
+          }
         />
 
 

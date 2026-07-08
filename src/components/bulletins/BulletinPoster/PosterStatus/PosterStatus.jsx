@@ -1,22 +1,59 @@
 import { upper } from "@/utils/formatters";
 
-function PosterStatus({ status }) {
+
+function PosterStatus({
+  status,
+}) {
+
+
+  const text =
+    status ||
+    "EXPULSIÓN VIGENTE";
+
+
 
   return (
 
     <div
       className="
       bg-red-600
-      text-white
-      rounded-lg
-      px-5
+      rounded-xl
+      px-6
       py-4
-      text-2xl
-      font-black
+      flex
+      items-center
+      gap-3
+      text-white
       "
     >
 
-      ⚠ {upper(status) || "EXPULSIÓN VIGENTE"}
+
+      <span
+        className="
+        text-3xl
+        font-black
+        "
+      >
+
+        ⚠
+
+      </span>
+
+
+
+      <p
+        className="
+        text-3xl
+        font-black
+        "
+      >
+
+        {
+          upper(text)
+        }
+
+      </p>
+
 
     </div>
 

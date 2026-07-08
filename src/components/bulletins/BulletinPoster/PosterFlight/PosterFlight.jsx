@@ -1,23 +1,16 @@
-import { upper,
-  formatPosterDate,
-} from "@/utils/formatters";
+import { upper, formatPosterDateTime } from "@/utils/formatters";
 
-function FlightItem({
-  title,
-  value,
-}) {
+import { FaPlane } from "react-icons/fa";
 
+function FlightItem({ title, value }) {
   return (
-
     <div
       className="
-      flex-1
       border-r
       last:border-r-0
       px-3
       "
     >
-
       <p
         className="
         text-[11px]
@@ -26,73 +19,25 @@ function FlightItem({
         uppercase
         "
       >
-
         {title}
-
       </p>
-
 
       <p
         className="
         mt-2
         text-xs
         leading-relaxed
+        whitespace-pre-line
         "
       >
-
-        {upper(value) || "-"}
-
+        {upper(value)}
       </p>
-
-
     </div>
-
   );
-
 }
-
-
-function formatDateTime(value) {
-
-
-  if (!value) {
-    return "-";
-  }
-
-
-  const date =
-    new Date(value);
-
-
-
-  const hour =
-    date.toLocaleTimeString(
-      "es-CL",
-      {
-        hour: "2-digit",
-        minute: "2-digit",
-      }
-    );
-
-
-
-  return (
-
-    `${formatPosterDate(value)}
-     ${hour}`
-
-  );
-
-}
-
-
-
 
 function PosterFlight({ data }) {
-
-
   return (
-
     <section
       className="
       overflow-hidden
@@ -101,91 +46,54 @@ function PosterFlight({ data }) {
       border-yellow-400
       "
     >
-
-
       {/* HEADER */}
 
       <div
         className="
-        bg-[#001b4d]
-        text-white
-        px-5
-        py-3
-        font-black
-        "
+ bg-[#001b4d]
+ text-white
+ px-5
+ py-3
+ flex
+ items-center
+ gap-3
+ font-black
+ "
       >
-
-        ✈ INFORMACIÓN DEL VUELO
-
+        <FaPlane />
+        INFORMACIÓN DEL VUELO
       </div>
-
-
-
 
       {/* BODY */}
 
       <div
         className="
-        flex
+        grid
+        grid-cols-[1fr_1fr_2fr_2fr_1fr_1fr]
         bg-white
         p-4
         "
       >
+        <FlightItem title="Aerolínea" value={data.airline} />
 
+        <FlightItem title="Número de vuelo" value={data.flightNumber} />
 
-        <FlightItem
-          title="Aerolínea"
-          value={data.airline}
-        />
+        <FlightItem title="Origen" value={data.origin} />
 
-
-        <FlightItem
-          title="Número de vuelo"
-          value={data.flightNumber}
-        />
-
-
-        <FlightItem
-          title="Origen"
-          value={data.origin}
-        />
-
-
-        <FlightItem
-          title="Destino"
-          value={data.destination}
-        />
-
+        <FlightItem title="Destino" value={data.destination} />
 
         <FlightItem
           title="Salida"
-          value={
-            formatDateTime(
-              data.departure
-            )
-          }
+          value={formatPosterDateTime(data.departure)}
         />
-
 
         <FlightItem
           title="Llegada"
-          value={
-            formatDateTime(
-              data.arrival
-            )
-          }
+          value={formatPosterDateTime(data.arrival)}
         />
-
-
       </div>
-
-
     </section>
-
   );
-
 }
-
-
 
 export default PosterFlight;

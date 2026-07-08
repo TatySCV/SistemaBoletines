@@ -1,7 +1,13 @@
 import {
-  upper,
+  FaClock,
+} from "react-icons/fa";
+
+
+import {
   formatPosterDate,
+  upper,
 } from "@/utils/formatters";
+
 
 function PosterTimeline({
   items = [],
@@ -12,8 +18,8 @@ function PosterTimeline({
 
     <section
       className="
-      rounded-xl
       overflow-hidden
+      rounded-xl
       border
       "
     >
@@ -23,115 +29,124 @@ function PosterTimeline({
         className="
         bg-[#001b4d]
         text-white
-        font-black
         px-5
         py-3
+        flex
+        gap-2
+        items-center
+        font-black
         "
       >
 
+        <FaClock />
+
         LÍNEA DE TIEMPO RELEVANTE
+
 
       </div>
 
 
 
 
-      <div className="p-5 space-y-5">
+      <div
+        className="
+        p-5
+        space-y-5
+        "
+      >
 
 
         {
-          items.length === 0 && (
-
-            <p className="text-sm text-slate-400">
-
-              Sin eventos
-
-            </p>
-
-          )
-        }
-
-
-
-        {
-          items.map((item, index) => (
-
-            <div
-              key={index}
-              className="
-              flex
-              gap-4
-              "
-            >
-
-
-              {/* PUNTO AZUL */}
+          items?.map(
+            (
+              item,
+              index
+            ) => (
 
               <div
+                key={index}
                 className="
                 flex
-                flex-col
-                items-center
+                gap-4
                 "
               >
 
-                <div
-                  className="
-                  h-3
-                  w-3
-                  rounded-full
-                  bg-blue-600
-                  "
-                />
-
 
                 <div
                   className="
-                  flex-1
-                  w-px
-                  bg-blue-600
-                  "
-                />
-
-              </div>
-
-
-
-              {/* TEXTO */}
-
-              <div>
-
-
-                <p
-                  className="
-                  text-xs
-                  font-black
-                  text-blue-700
+                  flex
+                  flex-col
+                  items-center
                   "
                 >
 
-                {
- formatPosterDate(
-   item.date
- ) || "-"
-}
 
-                </p>
+                  <div
+                    className="
+                    h-3
+                    w-3
+                    rounded-full
+                    bg-blue-600
+                    "
+                  />
 
 
-                <p className="text-xs">
+                  <div
+                    className="
+                    flex-1
+                    w-px
+                    bg-blue-600
+                    "
+                  />
 
-                  {upper(item.description) || "-"}
 
-                </p>
+                </div>
+
+
+
+                <div>
+
+
+                  <p
+                    className="
+                    text-blue-600
+                    font-black
+                    text-xs
+                    "
+                  >
+
+                    {
+                      formatPosterDate(
+                        item.date
+                      )
+                    }
+
+                  </p>
+
+
+                  <p
+                    className="
+                    text-xs
+                    leading-relaxed
+                    "
+                  >
+
+                    {
+                      upper(
+                        item.description
+                      )
+                    }
+
+                  </p>
+
+
+                </div>
 
 
               </div>
 
-
-            </div>
-
-          ))
+            )
+          )
         }
 
 

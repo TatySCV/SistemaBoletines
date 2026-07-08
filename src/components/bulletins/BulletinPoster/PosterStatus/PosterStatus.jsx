@@ -1,3 +1,5 @@
+import { upper } from "@/utils/formatters";
+
 function PosterStatus({ status }) {
 
   return (
@@ -14,7 +16,7 @@ function PosterStatus({ status }) {
       "
     >
 
-      ⚠ {status || "EXPULSIÓN VIGENTE"}
+      ⚠ {upper(status) || "EXPULSIÓN VIGENTE"}
 
     </div>
 

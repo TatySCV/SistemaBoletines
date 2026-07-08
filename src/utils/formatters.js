@@ -9,23 +9,16 @@ export function upper(value) {
 
 
 
-// FECHA FORMATO PDI
-// 2026-07-08 -> 08.JUL.026
 
 export function formatPosterDate(value) {
 
+
   if (!value) {
+
     return "--.---.---";
+
   }
 
-
-  const date =
-    new Date(value);
-
-
-  if (isNaN(date)) {
-    return value;
-  }
 
 
   const months = [
@@ -45,6 +38,36 @@ export function formatPosterDate(value) {
 
 
 
+  // viene desde input date: YYYY-MM-DD
+
+  if (
+    typeof value === "string" &&
+    value.includes("-")
+  ) {
+
+
+    const [
+      year,
+      month,
+      day,
+    ] = value.split("-");
+
+
+
+    return (
+      `${day}.${months[Number(month) - 1]}.${year.slice(-3)}`
+    );
+
+  }
+
+
+
+
+  const date =
+    new Date(value);
+
+
+
   const day =
     String(
       date.getDate()
@@ -60,7 +83,6 @@ export function formatPosterDate(value) {
     ];
 
 
-
   const year =
     String(
       date.getFullYear()
@@ -72,12 +94,15 @@ export function formatPosterDate(value) {
     `${day}.${month}.${year}`
   );
 
+
 }
 
 
 
 
+
 export function formatGender(value) {
+
 
   const genders = {
 
@@ -89,9 +114,11 @@ export function formatGender(value) {
 
 
   return (
+
     genders[value] ||
     value ||
     "-"
+
   );
 
 }

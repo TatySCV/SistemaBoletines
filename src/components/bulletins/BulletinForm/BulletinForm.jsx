@@ -2,13 +2,13 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import defaultValues from "@/forms/bulletin/defaultValues";
 
-import BulletinGeneral from "../BulletinGeneral";
+// import BulletinGeneral from "../BulletinGeneral";
 import BulletinPersonalData from "../BulletinPersonalData";
-import BulletinInternationalRecord from "../BulletinInternationalRecord";
-import BulletinChileRecord from "../BulletinChileRecord";
-import BulletinResolution from "../BulletinResolution";
-import BulletinTimeline from "../BulletinTimeline";
-import BulletinFlight from "../BulletinFlight";
+// import BulletinInternationalRecord from "../BulletinInternationalRecord";
+// import BulletinChileRecord from "../BulletinChileRecord";
+// import BulletinResolution from "../BulletinResolution";
+// import BulletinTimeline from "../BulletinTimeline";
+// import BulletinFlight from "../BulletinFlight";
 import BulletinObservations from "../BulletinObservations";
 
 import Button from "@/components/ui/Button";
@@ -30,19 +30,19 @@ function BulletinForm() {
         onSubmit={methods.handleSubmit(onSubmit)}
         className="space-y-8"
       >
-        <BulletinGeneral />
+        {/* <BulletinGeneral /> */}
 
         <BulletinPersonalData />
 
-        <BulletinInternationalRecord />
+        {/* <BulletinInternationalRecord /> */}
 
-        <BulletinChileRecord />
+        {/* <BulletinChileRecord /> */}
 
-        <BulletinResolution />
+        {/* <BulletinResolution /> */}
 
-        <BulletinTimeline />
+        {/* <BulletinTimeline /> */}
 
-        <BulletinFlight />
+        {/* <BulletinFlight /> */}
 
         <BulletinObservations />
 

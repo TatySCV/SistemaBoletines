@@ -1,34 +1,94 @@
-import personalFields from "@/forms/bulletin/personalFields";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 
+import Section from "@/components/ui/Section";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
-import Section from "@/components/ui/Section";
+
+import SearchSelect from "@/components/ui/SearchSelect";
+import countries from "@/data/countries";
 
 function BulletinPersonalData() {
+  const { watch, setValue } = useFormContext();
+
+  const birthDate = watch("birthDate");
+
+  useEffect(() => {
+    if (!birthDate) {
+      setValue("age", "");
+      return;
+    }
+
+    const today = new Date();
+    const birth = new Date(birthDate);
+
+    let age = today.getFullYear() - birth.getFullYear();
+
+    const month = today.getMonth() - birth.getMonth();
+
+    if (month < 0 || (month === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+
+    setValue("age", age);
+  }, [birthDate, setValue]);
+
   return (
-    <Section
-      title="Datos personales"
-      subtitle="Información básica de la persona."
-    >
+    <Section title="Datos Personales" subtitle="Información de identificación.">
       <div className="grid grid-cols-2 gap-5">
-        {personalFields.map((field) => {
+        <Input name="firstName" label="Nombres" required />
 
-          if (field.type === "select") {
-            return (
-              <Select
-                key={field.name}
-                {...field}
-              />
-            );
-          }
+        <Input name="lastName" label="Apellidos" required />
 
-          return (
-            <Input
-              key={field.name}
-              {...field}
-            />
-          );
-        })}
+        <Input name="alias" label="Alias" />
+
+        <SearchSelect
+          name="nationality"
+          label="Nacionalidad"
+          options={countries}
+        />
+
+        <Select
+          name="gender"
+          label="Sexo"
+          options={[
+            {
+              value: "M",
+              label: "Masculino",
+            },
+            {
+              value: "F",
+              label: "Femenino",
+            },
+          ]}
+        />
+
+        <Input type="date" name="birthDate" label="Fecha de nacimiento" />
+
+        <Input name="age" label="Edad" readOnly />
+
+        <Select
+          name="documentType"
+          label="Tipo de documento"
+          options={[
+            {
+              value: "pasaporte",
+              label: "Pasaporte",
+            },
+            {
+              value: "cedula",
+              label: "Cédula",
+            },
+            {
+              value: "dni",
+              label: "DNI",
+            },
+          ]}
+        />
+
+        <div className="col-span-2">
+          <Input name="documentNumber" label="Número de documento" />
+        </div>
       </div>
     </Section>
   );

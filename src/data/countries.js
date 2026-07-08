@@ -1,0 +1,25 @@
+const countries = [
+  "Afganistán",
+  "Alemania",
+  "Argentina",
+  "Bolivia",
+  "Brasil",
+  "Canadá",
+  "Chile",
+  "China",
+  "Colombia",
+  "Costa Rica",
+  "Cuba",
+  "Ecuador",
+  "España",
+  "Estados Unidos",
+  "Francia",
+  "Italia",
+  "México",
+  "Paraguay",
+  "Perú",
+  "Uruguay",
+  "Venezuela",
+];
+
+export default countries;

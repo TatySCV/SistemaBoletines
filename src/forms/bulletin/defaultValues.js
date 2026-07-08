@@ -9,23 +9,25 @@ const defaultValues = {
 
   photo: null,
 
-  // -----------------------------
-  // Datos Personales
-  // -----------------------------
+// -----------------------------
+// Datos Personales
+// -----------------------------
 
-  firstName: "",
+firstName: "",
+lastName: "",
+alias: "",
 
-  lastName: "",
+nationality: "",
 
-  nationality: "",
+birthDate: "",
 
-  birthDate: "",
+age: "",
 
-  gender: "",
+gender: "",
 
-  documentType: "",
+documentType: "",
 
-  documentNumber: "",
+documentNumber: "",
 
   // -----------------------------
   // Antecedente Internacional

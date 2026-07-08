@@ -6,8 +6,21 @@ const defaultValues = {
   birthDate: "",
   nationality: "",
   photo: null,
-  expulsions: [],
-  antecedentes: [],
+  expulsions: [
+  {
+    type: "",
+    date: "",
+    decree: "",
+    reason: "",
+  },
+],
+  antecedentes: [
+  {
+    type: "",
+    date: "",
+    description: "",
+  },
+],
   observations: "",
 };
 

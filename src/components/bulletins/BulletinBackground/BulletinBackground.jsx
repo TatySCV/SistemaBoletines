@@ -1,16 +1,50 @@
-import Card from "@/components/ui/Card";
+import { useFieldArray, useFormContext } from "react-hook-form";
+
 import Button from "@/components/ui/Button";
+import Section from "@/components/ui/Section";
+
+import BackgroundItem from "../BackgroundItem";
 
 function BulletinBackground() {
+  const { control } = useFormContext();
+
+  const {
+    fields,
+    append,
+    remove,
+  } = useFieldArray({
+    control,
+    name: "antecedentes",
+  });
+
   return (
-    <Card
+    <Section
       title="Antecedentes"
-      subtitle="Agregue los antecedentes que aparecerán en el boletín."
+      subtitle="Puede agregar uno o más antecedentes."
     >
-      <Button>
-        + Agregar antecedente
-      </Button>
-    </Card>
+      <div className="space-y-5">
+        {fields.map((field, index) => (
+          <BackgroundItem
+            key={field.id}
+            index={index}
+            onRemove={() => remove(index)}
+          />
+        ))}
+
+        <Button
+          type="button"
+          onClick={() =>
+            append({
+              type: "",
+              date: "",
+              description: "",
+            })
+          }
+        >
+          + Agregar antecedente
+        </Button>
+      </div>
+    </Section>
   );
 }
 

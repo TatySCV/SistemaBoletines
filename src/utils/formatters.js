@@ -2,18 +2,30 @@ export function upper(value) {
 
   if (!value) return "-";
 
-  return String(value).toUpperCase();
+  return String(value)
+    .toUpperCase();
 
 }
 
 
 
+// FECHA FORMATO PDI
+// 2026-07-08 -> 08.JUL.026
+
 export function formatPosterDate(value) {
 
-  if (!value) return "--.---.---";
+  if (!value) {
+    return "--.---.---";
+  }
 
 
-  const date = new Date(value);
+  const date =
+    new Date(value);
+
+
+  if (isNaN(date)) {
+    return value;
+  }
 
 
   const months = [
@@ -32,9 +44,14 @@ export function formatPosterDate(value) {
   ];
 
 
+
   const day =
-    String(date.getDate())
-      .padStart(2, "0");
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const month =
@@ -43,11 +60,38 @@ export function formatPosterDate(value) {
     ];
 
 
+
   const year =
-    String(date.getFullYear())
-      .slice(-3);
+    String(
+      date.getFullYear()
+    ).slice(-3);
 
 
-  return `${day}.${month}.${year}`;
+
+  return (
+    `${day}.${month}.${year}`
+  );
+
+}
+
+
+
+
+export function formatGender(value) {
+
+  const genders = {
+
+    M: "MASCULINO",
+
+    F: "FEMENINO",
+
+  };
+
+
+  return (
+    genders[value] ||
+    value ||
+    "-"
+  );
 
 }

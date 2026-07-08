@@ -1,4 +1,7 @@
-import { upper } from "@/utils/formatters";
+import {
+  upper,
+  formatPosterDate,
+} from "@/utils/formatters";
 
 function ResolutionItem({
   title,
@@ -90,10 +93,13 @@ function PosterResolution({ data }) {
 
 
         <ResolutionItem
-          title="FECHA RESOLUCIÓN"
-          value={data.resolutionDate}
-        />
-
+  title="FECHA RESOLUCIÓN"
+  value={
+    formatPosterDate(
+      data.resolutionDate
+    )
+  }
+/>
 
 
         <ResolutionItem

@@ -1,4 +1,6 @@
-import { upper } from "@/utils/formatters";
+import { upper,
+  formatPosterDate,
+} from "@/utils/formatters";
 
 function FlightItem({
   title,
@@ -50,23 +52,35 @@ function FlightItem({
 }
 
 
-
 function formatDateTime(value) {
 
-  if (!value) return "-";
+
+  if (!value) {
+    return "-";
+  }
 
 
-  const date = new Date(value);
+  const date =
+    new Date(value);
 
 
-  return date.toLocaleString(
-    "es-CL",
-    {
-      day: "2-digit",
-      month: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-    }
+
+  const hour =
+    date.toLocaleTimeString(
+      "es-CL",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    );
+
+
+
+  return (
+
+    `${formatPosterDate(value)}
+     ${hour}`
+
   );
 
 }

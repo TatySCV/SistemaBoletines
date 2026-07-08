@@ -1,4 +1,7 @@
-import { upper } from "@/utils/formatters";
+import {
+  upper,
+  formatPosterDate,
+} from "@/utils/formatters";
 
 function PosterTimeline({
   items = [],
@@ -107,7 +110,11 @@ function PosterTimeline({
                   "
                 >
 
-                  {item.date || "-"}
+                {
+ formatPosterDate(
+   item.date
+ ) || "-"
+}
 
                 </p>
 

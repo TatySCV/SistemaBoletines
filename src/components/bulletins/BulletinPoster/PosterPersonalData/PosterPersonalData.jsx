@@ -1,4 +1,8 @@
-import { upper } from "@/utils/formatters";
+import {
+  upper,
+  formatGender,
+  formatPosterDate,
+} from "@/utils/formatters";
 
 function DataItem({ label, value }) {
   return (
@@ -106,10 +110,13 @@ function PosterPersonalData({ data }) {
 
 
         <DataItem
-          label="FECHA NACIMIENTO"
-          value={data.birthDate}
-        />
-
+  label="FECHA NACIMIENTO"
+  value={
+    formatPosterDate(
+      data.birthDate
+    )
+  }
+/>
 
 
         <DataItem
@@ -119,10 +126,7 @@ function PosterPersonalData({ data }) {
 
 
 
-        <DataItem
-          label="GÉNERO"
-          value={data.gender}
-        />
+        import { upper } from "@/utils/formatters";
 
 
 

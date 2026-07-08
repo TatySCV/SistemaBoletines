@@ -155,7 +155,7 @@ const BulletinPoster = forwardRef(
           <div
             className="
             grid
-            grid-cols-2
+            grid-cols-[30%_1fr]
             gap-5
             "
           >

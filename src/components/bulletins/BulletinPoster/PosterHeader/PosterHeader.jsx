@@ -1,7 +1,14 @@
-import { formatPosterDate } from "@/utils/formatters";
+import logoPDI from "@/assets/icons/icon.png";
+import {
+  formatPosterDate,
+} from "@/utils/formatters";
+
 
 function PosterHeader({ date }) {
+
+
   return (
+
     <header
       className="
       h-28
@@ -14,52 +21,66 @@ function PosterHeader({ date }) {
       "
     >
 
-      {/* LOGO */}
 
-      <div className="flex items-center gap-5">
+      {/* IZQUIERDA */}
+
+      <div
+        className="
+        flex
+        items-center
+        gap-6
+        "
+      >
+
+
+        <img
+          src={logoPDI}
+          className="
+          w-32
+          object-contain
+          "
+        />
+
+
+
+        <div
+          className="
+          h-16
+          w-px
+          bg-white
+          "
+        />
+
+
 
         <div>
+
 
           <h1
             className="
-            text-5xl
+            text-3xl
             font-black
-            text-yellow-400
-            leading-none
             "
           >
-            PDI
+
+            BOLETÍN INFORMATIVO
+
           </h1>
 
-          <p className="font-bold text-sm">
-            JENAMIG
-          </p>
 
-        </div>
-
-
-        <div className="h-16 w-px bg-white" />
-
-
-        <div>
-
-          <h2
-            className="
-            text-2xl
-            font-black
-            "
-          >
-            BOLETÍN INFORMATIVO
-          </h2>
 
           <p
             className="
+            text-xl
             text-yellow-400
             font-black
             "
           >
+
             DE EXTRANJEROS EXPULSADOS
+
           </p>
+
 
         </div>
 
@@ -67,11 +88,13 @@ function PosterHeader({ date }) {
       </div>
 
 
+
+
       {/* FECHA */}
 
       <div
         className="
-        border
+        border-2
         border-yellow-400
         rounded-xl
         px-5
@@ -80,9 +103,18 @@ function PosterHeader({ date }) {
         "
       >
 
-        <p className="text-xs font-bold">
+
+        <p
+          className="
+          text-xs
+          font-black
+          "
+        >
+
           FECHA DEL BOLETÍN
+
         </p>
+
 
         <p
           className="
@@ -91,13 +123,20 @@ function PosterHeader({ date }) {
           font-black
           "
         >
-{formatPosterDate(date)}        </p>
+
+          {formatPosterDate(date)}
+
+        </p>
+
 
       </div>
 
 
     </header>
+
   );
+
 }
+
 
 export default PosterHeader;

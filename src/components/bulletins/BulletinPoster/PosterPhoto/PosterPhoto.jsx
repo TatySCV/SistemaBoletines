@@ -32,13 +32,14 @@ function PosterPhoto({ photo }) {
           image ? (
 
             <img
-              src={image}
-              className="
-              h-full
-              w-full
-              object-cover
-              "
-            />
+  src={image}
+  className="
+  h-full
+  w-full
+  object-cover
+  object-top
+  "
+/>
 
           ) : (
 

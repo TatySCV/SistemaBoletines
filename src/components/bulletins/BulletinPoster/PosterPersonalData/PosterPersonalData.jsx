@@ -4,45 +4,54 @@ import {
   formatPosterDate,
 } from "@/utils/formatters";
 
-function DataItem({ label, value }) {
+function DataItem({
+  label,
+  value,
+}) {
+
+
   return (
+
     <div
       className="
       border-b
-      border-slate-200
-      pb-3
+      border-slate-300
+      pb-4
       "
     >
 
       <p
         className="
-        text-[11px]
+        text-base
         font-black
         text-[#001b4d]
-        uppercase
         "
       >
+
         {label}
+
       </p>
 
 
       <p
         className="
-        text-sm
-        font-medium
+        text-lg
+        font-bold
         text-black
         mt-1
         "
       >
-        {upper(value) || "-"}
+
+        {upper(value)}
+
       </p>
 
 
     </div>
+
   );
+
 }
-
-
 
 function PosterPersonalData({ data }) {
 
@@ -56,7 +65,6 @@ function PosterPersonalData({ data }) {
       bg-white
       "
     >
-
 
       {/* HEADER */}
 
@@ -123,12 +131,6 @@ function PosterPersonalData({ data }) {
           label="TIPO DOCUMENTO"
           value={data.documentType}
         />
-
-
-
-        import { upper } from "@/utils/formatters";
-
-
 
         <DataItem
           label="NÚMERO DOCUMENTO"

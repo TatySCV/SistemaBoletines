@@ -9,25 +9,25 @@ const defaultValues = {
 
   photo: null,
 
-// -----------------------------
-// Datos Personales
-// -----------------------------
+  // -----------------------------
+  // Datos Personales
+  // -----------------------------
 
-firstName: "",
-lastName: "",
-alias: "",
+  firstName: "",
+  lastName: "",
+  alias: "",
 
-nationality: "",
+  nationality: "",
 
-birthDate: "",
+  birthDate: "",
 
-age: "",
+  age: "",
 
-gender: "",
+  gender: "",
 
-documentType: "",
+  documentType: "",
 
-documentNumber: "",
+  documentNumber: "",
 
   // -----------------------------
   // Antecedente Internacional
@@ -53,11 +53,13 @@ documentNumber: "",
 
   resolutionNumber: "",
 
+  resolutionRectified: false,
+
   resolutionDate: "",
 
   issuingService: "",
 
-  resolutionStatus: "",
+  resolutionStatus: "vigente",
 
   // -----------------------------
   // Línea de tiempo
@@ -74,6 +76,8 @@ documentNumber: "",
   // Vuelo
   // -----------------------------
 
+  hasFlight: false,
+  
   airline: "",
 
   flightNumber: "",

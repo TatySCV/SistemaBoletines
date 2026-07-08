@@ -1,18 +1,27 @@
-import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
+import Textarea from "@/components/ui/Textarea";
+
 
 function BulletinObservations() {
+
   return (
-    <Card
-      title="Observaciones"
-      subtitle="Información adicional."
+
+    <Section
+      title="Observaciones Internas"
+      subtitle="Información que no aparece en el boletín."
     >
-      <textarea
-        rows={5}
-        className="w-full rounded-xl border border-slate-300 p-3 outline-none focus:border-[#003B70]"
-        placeholder="Ingrese observaciones..."
+
+      <Textarea
+        name="observations"
+        label="Observaciones"
+        placeholder="Ingrese observaciones internas..."
       />
-    </Card>
+
+    </Section>
+
   );
+
 }
+
 
 export default BulletinObservations;

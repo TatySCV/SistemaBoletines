@@ -1,67 +1,92 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
-import defaultValues from "@/forms/bulletin/defaultValues";
 
-// import BulletinGeneral from "../BulletinGeneral";
+import BulletinGeneral from "../BulletinGeneral";
 import BulletinPersonalData from "../BulletinPersonalData";
 import BulletinInternationalRecord from "../BulletinInternationalRecord";
 import BulletinChileRecord from "../BulletinChileRecord";
-// import BulletinResolution from "../BulletinResolution";
-// import BulletinTimeline from "../BulletinTimeline";
-// import BulletinFlight from "../BulletinFlight";
+import BulletinResolution from "../BulletinResolution";
+import BulletinTimeline from "../BulletinTimeline";
+import BulletinFlight from "../BulletinFlight";
 import BulletinObservations from "../BulletinObservations";
+
 
 import Button from "@/components/ui/Button";
 
+
 function BulletinForm() {
-  const methods = useForm({
-    defaultValues,
-    mode: "onBlur",
-  });
+
+
+  const methods = useFormContext();
+
 
   const onSubmit = (data) => {
+
     console.clear();
+
     console.log(data);
+
   };
 
+
   return (
-    <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="space-y-8"
-      >
-        {/* <BulletinGeneral /> */}
 
-        <BulletinPersonalData />
+    <form
+      onSubmit={methods.handleSubmit(onSubmit)}
+      className="space-y-8"
+    >
 
-        <BulletinInternationalRecord /> 
+      <BulletinGeneral />
 
-        <BulletinChileRecord />
+      <BulletinPersonalData />
 
-        {/* <BulletinResolution /> */}
+      <BulletinInternationalRecord />
 
-        {/* <BulletinTimeline /> */}
+      <BulletinChileRecord />
 
-        {/* <BulletinFlight /> */}
+      <BulletinResolution />
 
-        <BulletinObservations />
+      <BulletinTimeline />
 
-        <div className="flex justify-end gap-4 pt-4 border-t border-slate-200">
-          <Button variant="secondary" type="button">
-            Vista previa
-          </Button>
+      <BulletinFlight />
 
-          <Button variant="secondary" type="button">
-            Guardar borrador
-          </Button>
+      <BulletinObservations />
 
-          <Button type="submit">
-            Generar boletín
-          </Button>
-        </div>
-      </form>
-    </FormProvider>
+
+      <div className="
+        flex
+        justify-end
+        gap-4
+        border-t
+        pt-6
+      ">
+
+
+        <Button
+          variant="secondary"
+          type="button"
+        >
+
+          Cancelar
+
+        </Button>
+
+
+        <Button type="submit">
+
+          Guardar Boletín
+
+        </Button>
+
+
+      </div>
+
+
+    </form>
+
   );
+
 }
+
 
 export default BulletinForm;

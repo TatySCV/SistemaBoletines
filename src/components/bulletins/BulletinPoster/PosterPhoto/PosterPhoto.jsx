@@ -1,72 +1,135 @@
-function PosterPhoto({ photo }) {
+import { useEffect, useState } from "react";
 
 
-  const image =
-    photo instanceof File
-      ? URL.createObjectURL(photo)
-      : null;
+function PosterPhoto({
+  photo,
+}) {
+
+
+  const [preview, setPreview] =
+    useState(null);
+
+
+
+  useEffect(() => {
+
+
+    if (!photo) {
+
+      setPreview(null);
+      return;
+
+    }
+
+
+
+    // cuando viene desde input file
+    if (photo instanceof File) {
+
+
+      const url =
+        URL.createObjectURL(
+          photo
+        );
+
+
+      setPreview(url);
+
+
+
+      return () =>
+        URL.revokeObjectURL(
+          url
+        );
+
+    }
+
+
+
+    // cuando ya es URL
+    setPreview(photo);
+
+
+  }, [photo]);
+
+
 
 
   return (
 
     <div
       className="
+      h-full
+      overflow-hidden
       rounded-xl
       border
-      overflow-hidden
-      bg-white
+      flex
+      flex-col
       "
     >
 
+
       <div
         className="
-        h-[360px]
+        flex-1
         bg-slate-200
-        flex
-        items-center
-        justify-center
         "
       >
 
         {
-          image ? (
+          preview ? (
 
             <img
-  src={image}
-  className="
-  h-full
-  w-full
-  object-cover
-  object-top
-  "
-/>
+              src={preview}
+              alt="Fotografía"
+              className="
+              h-full
+              w-full
+              object-cover
+              object-top
+              "
+            />
 
           ) : (
 
-            <span className="text-slate-400">
+            <div
+              className="
+              h-full
+              flex
+              items-center
+              justify-center
+              text-slate-400
+              "
+            >
 
               Fotografía
 
-            </span>
+
+            </div>
 
           )
+
         }
 
+
       </div>
+
 
 
       <div
         className="
         bg-[#001b4d]
         text-white
-        text-xs
         text-center
+        text-sm
         font-black
-        p-3
+        py-3
+        px-2
         "
       >
 
         SUJETO A EXPULSIÓN DEL TERRITORIO NACIONAL
+
 
       </div>
 

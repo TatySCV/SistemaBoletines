@@ -1,6 +1,8 @@
+import personalFields from "@/forms/bulletin/personalFields";
+
 import Input from "@/components/ui/Input";
-import Section from "@/components/ui/Section";
 import Select from "@/components/ui/Select";
+import Section from "@/components/ui/Section";
 
 function BulletinPersonalData() {
   return (
@@ -9,52 +11,24 @@ function BulletinPersonalData() {
       subtitle="Información básica de la persona."
     >
       <div className="grid grid-cols-2 gap-5">
-        <Input
-          name="firstName"
-          label="Nombres"
-          required
-          placeholder="Ingrese los nombres"
-        />
+        {personalFields.map((field) => {
 
-        <Input
-          name="lastName"
-          label="Apellidos"
-          required
-          placeholder="Ingrese los apellidos"
-        />
+          if (field.type === "select") {
+            return (
+              <Select
+                key={field.name}
+                {...field}
+              />
+            );
+          }
 
-        <Input
-          name="document"
-          label="Documento"
-          placeholder="Ingrese el documento"
-        />
-
-        <Select
-          name="sex"
-          label="Sexo"
-          options={[
-            {
-              value: "M",
-              label: "Masculino",
-            },
-            {
-              value: "F",
-              label: "Femenino",
-            },
-          ]}
-        />
-
-        <Input
-          name="birthDate"
-          type="date"
-          label="Fecha de nacimiento"
-        />
-
-        <Input
-          name="nationality"
-          label="Nacionalidad"
-          placeholder="Ingrese la nacionalidad"
-        />
+          return (
+            <Input
+              key={field.name}
+              {...field}
+            />
+          );
+        })}
       </div>
     </Section>
   );

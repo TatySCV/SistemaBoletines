@@ -62,23 +62,6 @@ function BulletinForm() {
       ">
 
 
-        <Button
-          variant="secondary"
-          type="button"
-        >
-
-          Cancelar
-
-        </Button>
-
-
-        <Button type="submit">
-
-          Guardar Boletín
-
-        </Button>
-
-
       </div>
 
 

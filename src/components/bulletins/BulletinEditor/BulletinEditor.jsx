@@ -1,84 +1,124 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { useRef } from "react";
+import {
+  FormProvider,
+  useForm,
+} from "react-hook-form";
+
+import {
+  useRef,
+} from "react";
+
 
 import {
   createBulletin,
 } from "@/services/bulletins";
 
+
 import {
   exportPosterJPG,
-  exportPosterPDF,
 } from "@/utils/export/posterExport";
 
+
 import defaultValues from "@/forms/bulletin/defaultValues";
+
 
 import BulletinForm from "../BulletinForm";
 import BulletinPoster from "../BulletinPoster";
 
 
+
+
+
 function BulletinEditor() {
 
 
-  const exportRef = useRef(null);
-
-
-  const methods = useForm({
-    defaultValues,
-    mode: "onBlur",
-  });
-
-
-  const bulletinData = methods.watch();
-
-async function handleSave() {
-
-
-  try {
-
-
-    const values =
-      methods.getValues();
+  const exportRef =
+    useRef(null);
 
 
 
-    const saved =
-      await createBulletin(
-        values
+  const methods =
+    useForm({
+      defaultValues,
+      mode: "onBlur",
+    });
+
+
+
+  const bulletinData =
+    methods.watch();
+
+
+
+
+
+  async function handleDownload() {
+
+
+    try {
+
+
+      const values =
+        methods.getValues();
+
+
+
+
+      // 1. GUARDAR BD
+
+      const saved =
+        await createBulletin(
+          values
+        );
+
+
+
+      console.log(
+        "BOLETÍN GUARDADO:",
+        saved
       );
 
 
 
-    console.log(
-      "BOLETIN GUARDADO:",
-      saved
-    );
+
+
+      // 2. EXPORTAR JPG
+
+      await exportPosterJPG(
+        exportRef.current
+      );
 
 
 
-    alert(
-      "Boletín guardado correctamente"
-    );
+
+
+      alert(
+        "Boletín generado correctamente"
+      );
 
 
 
-  } catch (error) {
+    } catch (error) {
 
 
-    console.error(
-      error
-    );
+      console.error(
+        error
+      );
 
 
 
-    alert(
-      "Error al guardar boletín"
-    );
+      alert(
+        "Error al generar boletín"
+      );
+
+
+    }
 
 
   }
 
 
-}
+
+
 
 
   return (
@@ -91,9 +131,13 @@ async function handleSave() {
 
         <div>
 
+
           <h1 className="text-3xl font-bold">
+
             Nuevo Boletín
+
           </h1>
+
 
 
           <p className="mt-2 text-slate-500">
@@ -102,7 +146,12 @@ async function handleSave() {
 
           </p>
 
+
         </div>
+
+
+
+
 
 
 
@@ -117,14 +166,21 @@ async function handleSave() {
         >
 
 
-          {/* FORM */}
+
+          {/* FORMULARIO */}
+
 
           <BulletinForm />
 
 
 
 
+
+
+
+
           {/* PREVIEW */}
+
 
           <div className="hidden xl:block">
 
@@ -141,6 +197,7 @@ async function handleSave() {
             >
 
 
+
               <h2 className="font-bold">
 
                 Vista previa
@@ -149,13 +206,15 @@ async function handleSave() {
 
 
 
+
+
               <div className="flex gap-3 my-4">
 
 
                 <button
                   type="button"
-                  onClick={() =>
-                    exportPosterJPG(exportRef.current)
+                  onClick={
+                    handleDownload
                   }
                   className="
                   bg-[#003B70]
@@ -170,46 +229,14 @@ async function handleSave() {
 
                 </button>
 
-                <button
-  type="button"
-  onClick={handleSave}
-  className="
-  rounded-xl
-  bg-green-600
-  px-4
-  py-2
-  text-white
-  text-sm
-  "
->
-
-  Guardar Boletín
-
-</button>
-
-
-
-
-                {/* <button
-                  type="button"
-                  onClick={() =>
-                    exportPosterPDF(exportRef.current)
-                  }
-                  className="
-                  bg-red-600
-                  text-white
-                  rounded-xl
-                  px-4
-                  py-2
-                  "
-                >
-
-                  Descargar PDF
-
-                </button> */}
 
 
               </div>
+
+
+
+
+
 
 
 
@@ -235,8 +262,11 @@ async function handleSave() {
                   "
                 >
 
+
                   <BulletinPoster
-                    data={bulletinData}
+                    data={
+                      bulletinData
+                    }
                   />
 
 
@@ -252,13 +282,18 @@ async function handleSave() {
           </div>
 
 
-
         </div>
 
 
 
 
-        {/* EXPORT OCULTO */}
+
+
+
+
+
+
+        {/* EXPORT REAL OCULTO */}
 
         <div
           className="
@@ -268,13 +303,18 @@ async function handleSave() {
           "
         >
 
+
           <BulletinPoster
-            ref={exportRef}
-            data={bulletinData}
+            ref={
+              exportRef
+            }
+            data={
+              bulletinData
+            }
           />
 
-        </div>
 
+        </div>
 
 
 
@@ -285,7 +325,9 @@ async function handleSave() {
 
   );
 
+
 }
+
 
 
 export default BulletinEditor;

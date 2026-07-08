@@ -1,7 +1,7 @@
 import Section from "@/components/ui/Section";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
-
+import bulletinStatus from "@/data/bulletinStatus";
 import generalFields from "@/forms/bulletin/generalFields";
 
 import FileUpload from "@/components/ui/FileUpload";
@@ -19,9 +19,10 @@ function BulletinGeneral() {
           if (field.type === "select") {
             return (
               <Select
-                key={field.name}
-                {...field}
-              />
+    name="status"
+    label="Estado"
+    options={bulletinStatus}
+/>
             );
           }
 

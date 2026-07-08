@@ -4,8 +4,8 @@ import defaultValues from "@/forms/bulletin/defaultValues";
 
 // import BulletinGeneral from "../BulletinGeneral";
 import BulletinPersonalData from "../BulletinPersonalData";
-// import BulletinInternationalRecord from "../BulletinInternationalRecord";
-// import BulletinChileRecord from "../BulletinChileRecord";
+import BulletinInternationalRecord from "../BulletinInternationalRecord";
+import BulletinChileRecord from "../BulletinChileRecord";
 // import BulletinResolution from "../BulletinResolution";
 // import BulletinTimeline from "../BulletinTimeline";
 // import BulletinFlight from "../BulletinFlight";
@@ -34,9 +34,9 @@ function BulletinForm() {
 
         <BulletinPersonalData />
 
-        {/* <BulletinInternationalRecord /> */}
+        <BulletinInternationalRecord /> 
 
-        {/* <BulletinChileRecord /> */}
+        <BulletinChileRecord />
 
         {/* <BulletinResolution /> */}
 

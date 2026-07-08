@@ -17,6 +17,13 @@ function Select({
 
   const error = errors[name]?.message;
 
+  const parseValue = (value) => {
+    if (value === "true") return true;
+    if (value === "false") return false;
+
+    return value;
+  };
+
   return (
     <div className={clsx("flex flex-col gap-2", className)}>
       {label && (
@@ -25,6 +32,7 @@ function Select({
           className="text-sm font-medium text-slate-700"
         >
           {label}
+
           {required && (
             <span className="ml-1 text-red-600">*</span>
           )}
@@ -36,9 +44,12 @@ function Select({
         name={name}
         render={({ field }) => (
           <select
-            {...field}
             id={name}
+            value={field.value ?? ""}
             disabled={disabled}
+            onChange={(e) =>
+              field.onChange(parseValue(e.target.value))
+            }
             className={clsx(
               "h-11 rounded-xl border bg-white px-3 outline-none transition-all",
               error
@@ -52,8 +63,8 @@ function Select({
 
             {options.map((option) => (
               <option
-                key={option.value}
-                value={option.value}
+                key={String(option.value)}
+                value={String(option.value)}
               >
                 {option.label}
               </option>

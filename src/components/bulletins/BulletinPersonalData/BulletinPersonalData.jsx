@@ -4,7 +4,8 @@ import { useFormContext } from "react-hook-form";
 import Section from "@/components/ui/Section";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
-
+import genders from "@/data/genders";
+import documentTypes from "@/data/documentTypes";
 import SearchSelect from "@/components/ui/SearchSelect";
 import countries from "@/data/countries";
 
@@ -48,20 +49,7 @@ function BulletinPersonalData() {
           options={countries}
         />
 
-        <Select
-          name="gender"
-          label="Sexo"
-          options={[
-            {
-              value: "M",
-              label: "Masculino",
-            },
-            {
-              value: "F",
-              label: "Femenino",
-            },
-          ]}
-        />
+        <Select name="gender" label="Sexo" options={genders} />
 
         <Input type="date" name="birthDate" label="Fecha de nacimiento" />
 
@@ -70,20 +58,7 @@ function BulletinPersonalData() {
         <Select
           name="documentType"
           label="Tipo de documento"
-          options={[
-            {
-              value: "pasaporte",
-              label: "Pasaporte",
-            },
-            {
-              value: "cedula",
-              label: "Cédula",
-            },
-            {
-              value: "dni",
-              label: "DNI",
-            },
-          ]}
+          options={documentTypes}
         />
 
         <div className="col-span-2">

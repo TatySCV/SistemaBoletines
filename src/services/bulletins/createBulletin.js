@@ -9,12 +9,15 @@ import {
 
 
 
+
+
 export async function createBulletin(
   formData
 ) {
 
 
   let photoUrl = null;
+
 
 
 
@@ -36,20 +39,25 @@ export async function createBulletin(
 
 
 
+
+
+
   // ==========================
-  // CREAR REGISTRO
+  // CREAR BOLETIN
   // ==========================
 
 
   const bulletin = {
 
 
+    // GENERAL
+
     bulletin_date:
-      formData.bulletinDate,
+      formData.bulletinDate || null,
 
 
     status:
-      formData.resolutionStatus,
+      formData.resolutionStatus || null,
 
 
     photo_url:
@@ -57,78 +65,107 @@ export async function createBulletin(
 
 
 
+
+
+
     // DATOS PERSONALES
 
     first_name:
-      formData.firstName,
+      formData.firstName || null,
 
 
     last_name:
-      formData.lastName,
+      formData.lastName || null,
 
 
     alias:
-      formData.alias,
+      formData.alias || null,
 
 
     nationality:
-      formData.nationality,
+      formData.nationality || null,
 
 
     gender:
-      formData.gender,
+      formData.gender || null,
 
 
     birth_date:
-      formData.birthDate,
+      formData.birthDate || null,
+
+
+    age:
+      formData.age || null,
 
 
     document_type:
-      formData.documentType,
+      formData.documentType || null,
 
 
     document_number:
-      formData.documentNumber,
+      formData.documentNumber || null,
+
+
+
+
 
 
 
     // ANTECEDENTES
 
-
     has_chile_record:
-      formData.hasChileRecord,
+      Boolean(
+        formData.hasChileRecord
+      ),
 
 
     chile_record:
-      formData.chileRecord,
+      formData.chileRecord || null,
+
 
 
     has_international_record:
-      formData.hasInternationalRecord,
+      Boolean(
+        formData.hasInternationalRecord
+      ),
 
 
     international_country:
-      formData.internationalCountry,
+      formData.internationalCountry || null,
 
 
     international_record:
-      formData.internationalRecord,
+      formData.internationalRecord || null,
 
 
 
-    // RESOLUCIÓN
+
+
+
+
+
+    // RESOLUCION
 
 
     resolution_number:
-      formData.resolutionNumber,
+      formData.resolutionNumber || null,
 
 
     resolution_date:
-      formData.resolutionDate,
+      formData.resolutionDate || null,
 
 
-    resolution_service:
-      formData.resolutionService,
+    issuing_service:
+      formData.issuingService || null,
+
+
+    resolution_status:
+      formData.resolutionStatus || null,
+
+
+
+
+
 
 
 
@@ -136,34 +173,56 @@ export async function createBulletin(
 
 
     has_flight:
-      formData.hasFlight,
+      Boolean(
+        formData.hasFlight
+      ),
+
 
 
     airline:
-      formData.airline,
+      formData.hasFlight
+        ? formData.airline || null
+        : null,
+
 
 
     flight_number:
-      formData.flightNumber,
+      formData.hasFlight
+        ? formData.flightNumber || null
+        : null,
+
 
 
     origin:
-      formData.origin,
+      formData.hasFlight
+        ? formData.origin || null
+        : null,
+
 
 
     destination:
-      formData.destination,
+      formData.hasFlight
+        ? formData.destination || null
+        : null,
+
 
 
     departure:
-      formData.departure,
+      formData.hasFlight
+        ? formData.departure || null
+        : null,
+
 
 
     arrival:
-      formData.arrival,
+      formData.hasFlight
+        ? formData.arrival || null
+        : null,
 
 
   };
+
+
 
 
 
@@ -174,10 +233,15 @@ export async function createBulletin(
     error,
   } =
     await supabase
-      .from("bulletins")
-      .insert(bulletin)
+      .from(
+        "bulletins"
+      )
+      .insert(
+        bulletin
+      )
       .select()
       .single();
+
 
 
 
@@ -195,6 +259,9 @@ export async function createBulletin(
 
 
   }
+
+
+
 
 
 

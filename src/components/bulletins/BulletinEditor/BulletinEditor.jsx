@@ -3,6 +3,7 @@ import {
   useForm,
 } from "react-hook-form";
 
+
 import {
   useRef,
 } from "react";
@@ -51,6 +52,7 @@ function BulletinEditor() {
 
 
 
+
   async function handleDownload() {
 
 
@@ -59,6 +61,7 @@ function BulletinEditor() {
 
       const values =
         methods.getValues();
+
 
 
 
@@ -81,11 +84,13 @@ function BulletinEditor() {
 
 
 
-      // 2. EXPORTAR JPG
+
+      // 2. DESCARGAR JPG GRANDE
 
       await exportPosterJPG(
         exportRef.current
       );
+
 
 
 
@@ -121,12 +126,16 @@ function BulletinEditor() {
 
 
 
+
+
+
   return (
 
     <FormProvider {...methods}>
 
 
       <div className="space-y-8">
+
 
 
         <div>
@@ -167,8 +176,8 @@ function BulletinEditor() {
 
 
 
-          {/* FORMULARIO */}
 
+          {/* FORM */}
 
           <BulletinForm />
 
@@ -180,7 +189,6 @@ function BulletinEditor() {
 
 
           {/* PREVIEW */}
-
 
           <div className="hidden xl:block">
 
@@ -208,6 +216,7 @@ function BulletinEditor() {
 
 
 
+
               <div className="flex gap-3 my-4">
 
 
@@ -230,7 +239,6 @@ function BulletinEditor() {
                 </button>
 
 
-
               </div>
 
 
@@ -238,10 +246,6 @@ function BulletinEditor() {
 
 
 
-
-
-
-              {/* SOLO VISUAL */}
 
               <div
                 className="
@@ -257,7 +261,7 @@ function BulletinEditor() {
 
                 <div
                   className="
-                  scale-[0.70]
+                  scale-[0.55]
                   origin-top-left
                   "
                 >
@@ -276,6 +280,7 @@ function BulletinEditor() {
               </div>
 
 
+
             </div>
 
 
@@ -291,9 +296,7 @@ function BulletinEditor() {
 
 
 
-
-
-        {/* EXPORT REAL OCULTO */}
+        {/* EXPORT JPG OCULTO */}
 
         <div
           className="
@@ -311,6 +314,7 @@ function BulletinEditor() {
             data={
               bulletinData
             }
+            exportMode
           />
 
 
@@ -318,10 +322,12 @@ function BulletinEditor() {
 
 
 
+
       </div>
 
 
     </FormProvider>
+
 
   );
 

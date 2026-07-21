@@ -36,30 +36,34 @@ function ActionButton({
 
 function BulletinActions({
   bulletin,
+  onView,
+  onEdit,
+  onDownload,
+  onDelete,
 }) {
   function handleView() {
-    console.log("Ver", bulletin.id);
+    onView?.(bulletin.id);
   }
 
   function handleEdit() {
-    console.log("Editar", bulletin.id);
+    onEdit?.(bulletin.id);
   }
 
   function handleDownload() {
-    console.log("Descargar", bulletin.id);
+    onDownload?.(bulletin.id);
   }
 
   function handleDelete() {
-    console.log("Eliminar", bulletin.id);
+    onDelete?.(bulletin.id);
   }
 
   return (
     <div
       className="
-      flex
-      items-center
-      justify-center
-      gap-2
+        flex
+        items-center
+        justify-center
+        gap-2
       "
     >
       <ActionButton

@@ -41,14 +41,15 @@ function StatusBadge({ status }) {
 
 function BulletinRow({
   bulletin,
+  onView,
 }) {
   return (
     <tr
       className="
-      border-b
-      last:border-b-0
-      hover:bg-slate-50
-      transition
+        border-b
+        last:border-b-0
+        transition
+        hover:bg-slate-50
       "
     >
       {/* FECHA */}
@@ -64,12 +65,11 @@ function BulletinRow({
       <td className="px-5 py-4">
         <div className="font-semibold">
           {upper(
-            `${bulletin.first_name ?? ""}
-             ${bulletin.last_name ?? ""}`
+            `${bulletin.first_name ?? ""} ${bulletin.last_name ?? ""}`
           )}
         </div>
 
-        <div className="text-xs text-slate-500 mt-1">
+        <div className="mt-1 text-xs text-slate-500">
           {bulletin.document_number || "-"}
         </div>
       </td>
@@ -101,6 +101,7 @@ function BulletinRow({
       <td className="px-5 py-4 text-center">
         <BulletinActions
           bulletin={bulletin}
+          onView={onView}
         />
       </td>
     </tr>

@@ -3,18 +3,11 @@ import BulletinRow from "./BulletinRow";
 function BulletinTable({
   bulletins = [],
   loading,
+  onView,
 }) {
   if (loading) {
     return (
-      <div
-        className="
-        rounded-2xl
-        bg-white
-        p-12
-        text-center
-        shadow
-        "
-      >
+      <div className="rounded-2xl bg-white p-12 text-center shadow">
         <p className="text-slate-500">
           Cargando boletines...
         </p>
@@ -24,15 +17,7 @@ function BulletinTable({
 
   if (bulletins.length === 0) {
     return (
-      <div
-        className="
-        rounded-2xl
-        bg-white
-        p-12
-        text-center
-        shadow
-        "
-      >
+      <div className="rounded-2xl bg-white p-12 text-center shadow">
         <h3 className="text-xl font-semibold">
           No existen boletines
         </h3>
@@ -45,26 +30,10 @@ function BulletinTable({
   }
 
   return (
-    <div
-      className="
-      overflow-hidden
-      rounded-2xl
-      bg-white
-      shadow
-      "
-    >
+    <div className="overflow-hidden rounded-2xl bg-white shadow">
       <table className="w-full">
-
-        {/* HEADER */}
-
-        <thead
-          className="
-          bg-[#003B70]
-          text-white
-          "
-        >
+        <thead className="bg-[#003B70] text-white">
           <tr>
-
             <th className="px-5 py-4 text-left">
               Fecha
             </th>
@@ -88,23 +57,18 @@ function BulletinTable({
             <th className="px-5 py-4 text-center">
               Acciones
             </th>
-
           </tr>
         </thead>
 
-        {/* BODY */}
-
         <tbody>
-
           {bulletins.map((bulletin) => (
             <BulletinRow
               key={bulletin.id}
               bulletin={bulletin}
+              onView={onView}
             />
           ))}
-
         </tbody>
-
       </table>
     </div>
   );

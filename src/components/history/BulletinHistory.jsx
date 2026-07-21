@@ -1,20 +1,29 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { getBulletins } from "@/services/bulletins";
+import BulletinPreview from "@/components/bulletins/BulletinPreview";
+
+import {
+  getBulletins,
+  getCompleteBulletin,
+} from "@/services/bulletins";
 
 import BulletinFilters from "./BulletinFilters";
 import BulletinTable from "./BulletinTable";
 
 function BulletinHistory() {
   const [bulletins, setBulletins] = useState([]);
-
   const [loading, setLoading] = useState(true);
 
   const [search, setSearch] = useState("");
-
   const [status, setStatus] = useState("");
-
   const [nationality, setNationality] = useState("");
+
+  // Preview
+
+  const [previewOpen, setPreviewOpen] = useState(false);
+
+  const [selectedBulletin, setSelectedBulletin] =
+    useState(null);
 
   async function loadBulletins() {
     try {
@@ -25,11 +34,31 @@ function BulletinHistory() {
       setBulletins(data);
     } catch (error) {
       console.error(error);
-
       alert("No fue posible cargar los boletines.");
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleView(id) {
+    try {
+      const bulletin =
+        await getCompleteBulletin(id);
+
+      setSelectedBulletin(bulletin);
+
+      setPreviewOpen(true);
+    } catch (error) {
+      console.error(error);
+
+      alert("No fue posible abrir el boletín.");
+    }
+  }
+
+  function handleClosePreview() {
+    setPreviewOpen(false);
+
+    setSelectedBulletin(null);
   }
 
   useEffect(() => {
@@ -69,23 +98,38 @@ function BulletinHistory() {
   ]);
 
   return (
-    <div className="space-y-6">
+    <>
+      <div className="space-y-6">
 
-      <BulletinFilters
-        search={search}
-        onSearchChange={setSearch}
-        status={status}
-        onStatusChange={setStatus}
-        nationality={nationality}
-        onNationalityChange={setNationality}
+        <BulletinFilters
+          search={search}
+          onSearchChange={setSearch}
+          status={status}
+          onStatusChange={setStatus}
+          nationality={nationality}
+          onNationalityChange={setNationality}
+        />
+
+        <BulletinTable
+          bulletins={filteredBulletins}
+          loading={loading}
+          onView={handleView}
+        />
+
+      </div>
+
+      <BulletinPreview
+        open={previewOpen}
+        bulletin={selectedBulletin}
+        onClose={handleClosePreview}
+        onDownload={(bulletin) => {
+          console.log("Descargar", bulletin);
+        }}
+        onEdit={(bulletin) => {
+          console.log("Editar", bulletin);
+        }}
       />
-
-      <BulletinTable
-        bulletins={filteredBulletins}
-        loading={loading}
-      />
-
-    </div>
+    </>
   );
 }
 

@@ -1,12 +1,6 @@
-export {
-  uploadPhoto,
-} from "./uploadPhoto";
-
-
-export {
-  createBulletin,
-} from "./createBulletin";
-
-export {
-  getBulletins,
-} from "./getBulletins";
+export * from "./createBulletin";
+export * from "./getBulletins";
+export * from "./getBulletinById";
+export * from "./updateBulletin";
+export * from "./deleteBulletin";
+export * from "./uploadPhoto";

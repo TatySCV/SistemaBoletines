@@ -1,17 +1,15 @@
 import { supabase } from "../supabase";
 
-export async function updateBulletin(
-  id,
-  values
-) {
+export async function getBulletinById(id) {
   const { data, error } = await supabase
     .from("bulletins")
-    .update(values)
+    .select("*")
     .eq("id", id)
-    .select()
     .single();
 
-  if (error) throw error;
+  if (error) {
+    throw new Error(error.message);
+  }
 
   return data;
 }

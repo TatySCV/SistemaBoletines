@@ -1,3 +1,1 @@
-export {
-  default as BulletinTable,
-} from "./BulletinTable";
+export { default } from "./BulletinHistory";

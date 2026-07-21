@@ -1,271 +1,57 @@
-import {
-  supabase,
-} from "@/services/supabase";
-
-
-import {
-  uploadPhoto,
-} from "./uploadPhoto";
-
-
-
-
-
-export async function createBulletin(
-  formData
-) {
-
-
-  let photoUrl = null;
-
-
-
-
-  // ==========================
-  // SUBIR FOTO
-  // ==========================
-
-
-  if (formData.photo instanceof File) {
-
-
-    photoUrl =
-      await uploadPhoto(
-        formData.photo
-      );
-
-
-  }
-
-
-
-
-
-
-  // ==========================
-  // CREAR BOLETIN
-  // ==========================
-
-
-  const bulletin = {
-
-
-    // GENERAL
-
-    bulletin_date:
-      formData.bulletinDate || null,
-
-
-    status:
-      formData.resolutionStatus || null,
-
-
-    photo_url:
-      photoUrl,
-
-
-
-
-
-
-    // DATOS PERSONALES
-
-    first_name:
-      formData.firstName || null,
-
-
-    last_name:
-      formData.lastName || null,
-
-
-    alias:
-      formData.alias || null,
-
-
-    nationality:
-      formData.nationality || null,
-
-
-    gender:
-      formData.gender || null,
-
-
-    birth_date:
-      formData.birthDate || null,
-
-
-    age:
-      formData.age || null,
-
-
-    document_type:
-      formData.documentType || null,
-
-
-    document_number:
-      formData.documentNumber || null,
-
-
-
-
-
-
-
-    // ANTECEDENTES
-
-    has_chile_record:
-      Boolean(
-        formData.hasChileRecord
-      ),
-
-
-    chile_record:
-      formData.chileRecord || null,
-
-
-
-    has_international_record:
-      Boolean(
-        formData.hasInternationalRecord
-      ),
-
-
-    international_country:
-      formData.internationalCountry || null,
-
-
-    international_record:
-      formData.internationalRecord || null,
-
-
-
-
-
-
-
-
-    // RESOLUCION
-
-
-    resolution_number:
-      formData.resolutionNumber || null,
-
-
-    resolution_date:
-      formData.resolutionDate || null,
-
-
-    issuing_service:
-      formData.issuingService || null,
-
-
-    resolution_status:
-      formData.resolutionStatus || null,
-
-
-
-
-
-
-
-
-    // VUELO
-
-
-    has_flight:
-      Boolean(
-        formData.hasFlight
-      ),
-
-
-
-    airline:
-      formData.hasFlight
-        ? formData.airline || null
-        : null,
-
-
-
-    flight_number:
-      formData.hasFlight
-        ? formData.flightNumber || null
-        : null,
-
-
-
-    origin:
-      formData.hasFlight
-        ? formData.origin || null
-        : null,
-
-
-
-    destination:
-      formData.hasFlight
-        ? formData.destination || null
-        : null,
-
-
-
-    departure:
-      formData.hasFlight
-        ? formData.departure || null
-        : null,
-
-
-
-    arrival:
-      formData.hasFlight
-        ? formData.arrival || null
-        : null,
-
-
-  };
-
-
-
-
-
-
-
-  const {
-    data,
-    error,
-  } =
-    await supabase
-      .from(
-        "bulletins"
-      )
-      .insert(
-        bulletin
-      )
-      .select()
-      .single();
-
-
-
-
-
-
-  if (error) {
-
-
-    console.error(
-      error
+import { uploadPhoto } from "./uploadPhoto";
+import { insertBulletin } from "./insertBulletin";
+import { insertRecords } from "./insertRecords";
+import { insertTimeline } from "./insertTimeline";
+import { insertFlight } from "./insertFlight";
+
+export async function createBulletin(formData) {
+  try {
+    // 1. Subir fotografía (si existe)
+    let photoUrl = null;
+
+    if (formData.photo) {
+      photoUrl = await uploadPhoto(formData.photo);
+    }
+
+    // 2. Crear objeto principal
+    const bulletinData = {
+      ...formData,
+      photo: photoUrl,
+    };
+
+    // 3. Insertar boletín principal
+    const bulletin = await insertBulletin(bulletinData);
+
+    console.log("Records:", formData.records);
+console.log("Timeline:", formData.timeline);
+console.log("Flight:", formData.flight);
+
+await insertRecords(bulletin.id, formData.records);
+await insertTimeline(bulletin.id, formData.timeline);
+await insertFlight(bulletin.id, formData.flight);
+
+    // 4. Insertar antecedentes
+    await insertRecords(
+      bulletin.id,
+      formData.records
     );
 
+    // 5. Insertar línea de tiempo
+    await insertTimeline(
+      bulletin.id,
+      formData.timeline
+    );
 
+    // 6. Insertar vuelo (si existe)
+    await insertFlight(
+      bulletin.id,
+      formData.flight
+    );
+
+    return bulletin;
+
+  } catch (error) {
+    console.error("Error creando boletín:", error);
     throw error;
-
-
   }
-
-
-
-
-
-
-  return data;
-
-
 }

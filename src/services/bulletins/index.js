@@ -6,3 +6,7 @@ export * from "./deleteBulletin";
 export * from "./uploadPhoto";
 export * from "./getCompleteBulletin";
 export * from "./adaptBulletin";
+export * from "./insertBulletin";
+export * from "./insertFlight";
+export * from "./insertRecords";
+export * from "./insertTimeline";

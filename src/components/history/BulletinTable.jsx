@@ -1,83 +1,110 @@
-import { formatPosterDate } from "@/utils/formatters";
+import BulletinRow from "./BulletinRow";
 
-function BulletinTable({ bulletins = [] }) {
+function BulletinTable({
+  bulletins = [],
+  loading,
+}) {
+  if (loading) {
+    return (
+      <div
+        className="
+        rounded-2xl
+        bg-white
+        p-12
+        text-center
+        shadow
+        "
+      >
+        <p className="text-slate-500">
+          Cargando boletines...
+        </p>
+      </div>
+    );
+  }
+
+  if (bulletins.length === 0) {
+    return (
+      <div
+        className="
+        rounded-2xl
+        bg-white
+        p-12
+        text-center
+        shadow
+        "
+      >
+        <h3 className="text-xl font-semibold">
+          No existen boletines
+        </h3>
+
+        <p className="mt-2 text-slate-500">
+          Aún no se han registrado boletines.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
       className="
       overflow-hidden
       rounded-2xl
-      border
       bg-white
+      shadow
       "
     >
-      <table
-        className="
-        w-full
-        text-left
-        "
-      >
+      <table className="w-full">
+
+        {/* HEADER */}
+
         <thead
           className="
-          bg-slate-100
-          text-sm
-          text-slate-600
+          bg-[#003B70]
+          text-white
           "
         >
           <tr>
-            <th className="p-4">Fecha</th>
 
-            <th className="p-4">Nombre</th>
+            <th className="px-5 py-4 text-left">
+              Fecha
+            </th>
 
-            <th className="p-4">Tipo de Documento</th>
+            <th className="px-5 py-4 text-left">
+              Nombre
+            </th>
 
-            <th className="p-4">Documento</th>
+            <th className="px-5 py-4 text-left">
+              Nacionalidad
+            </th>
 
-            <th className="p-4">Nacionalidad</th>
+            <th className="px-5 py-4 text-left">
+              Estado
+            </th>
 
-            <th className="p-4">Estado</th>
+            <th className="px-5 py-4 text-left">
+              Resolución
+            </th>
 
-            <th className="p-4">Acción</th>
+            <th className="px-5 py-4 text-center">
+              Acciones
+            </th>
+
           </tr>
         </thead>
 
+        {/* BODY */}
+
         <tbody>
-          {bulletins.map((item) => (
-            <tr
-              key={item.id}
-              className="
-                  border-t
-                  "
-            >
-              <td className="p-4">{formatPosterDate(item.bulletin_date)}</td>
 
-              <td className="p-4 font-semibold">
-                {item.first_name} {item.last_name}
-              </td>
-
-              <td className="p-4">{item.document_type}</td>
-
-              <td className="p-4">{item.document_number}</td>
-
-              <td className="p-4">{item.nationality}</td>
-
-              <td className="p-4">{item.status}</td>
-
-              <td className="p-4">
-                <button
-                  className="
-                      rounded-lg
-                      bg-[#003B70]
-                      px-3
-                      py-2
-                      text-white
-                      "
-                >
-                  Ver
-                </button>
-              </td>
-            </tr>
+          {bulletins.map((bulletin) => (
+            <BulletinRow
+              key={bulletin.id}
+              bulletin={bulletin}
+            />
           ))}
+
         </tbody>
+
       </table>
     </div>
   );

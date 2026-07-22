@@ -13,20 +13,9 @@ export function upper(value) {
 // 2026-07-08 -> 08.JUL.026
 
 export function formatPosterDate(value) {
-
   if (!value) {
     return "--.---.---";
   }
-
-
-  const date =
-    new Date(value);
-
-
-  if (isNaN(date)) {
-    return value;
-  }
-
 
   const months = [
     "ENE",
@@ -43,35 +32,14 @@ export function formatPosterDate(value) {
     "DIC",
   ];
 
+  // Espera formato YYYY-MM-DD
+  const [year, month, day] = value.split("-");
 
+  if (!year || !month || !day) {
+    return value;
+  }
 
-  const day =
-    String(
-      date.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  const month =
-    months[
-      date.getMonth()
-    ];
-
-
-
-  const year =
-    String(
-      date.getFullYear()
-    ).slice(-3);
-
-
-
-  return (
-    `${day}.${month}.${year}`
-  );
-
+  return `${day}.${months[Number(month) - 1]}.${year.slice(-3)}`;
 }
 
 

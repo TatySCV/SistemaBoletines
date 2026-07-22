@@ -1,21 +1,9 @@
-import {
-  FaClock,
-} from "react-icons/fa";
+import { FaClock } from "react-icons/fa";
 
+import { formatPosterDate, upper } from "@/utils/formatters";
 
-import {
-  formatPosterDate,
-  upper,
-} from "@/utils/formatters";
-
-
-function PosterTimeline({
-  items = [],
-}) {
-
-
+function PosterTimeline({ items = [] }) {
   return (
-
     <section
       className="
       overflow-hidden
@@ -23,8 +11,6 @@ function PosterTimeline({
       border
       "
     >
-
-
       <div
         className="
         bg-[#001b4d]
@@ -37,16 +23,9 @@ function PosterTimeline({
         font-black
         "
       >
-
         <FaClock />
-
         LÍNEA DE TIEMPO RELEVANTE
-
-
       </div>
-
-
-
 
       <div
         className="
@@ -54,110 +33,64 @@ function PosterTimeline({
         space-y-5
         "
       >
-
-
-        {
-          items?.map(
-            (
-              item,
-              index
-            ) => (
-
-              <div
-                key={index}
-                className="
+        {items?.map((item, index) => (
+          <div
+            key={index}
+            className="
                 flex
                 gap-4
                 "
-              >
-
-
-                <div
-                  className="
+          >
+            <div
+              className="
                   flex
                   flex-col
                   items-center
                   "
-                >
-
-
-                  <div
-                    className="
+            >
+              <div
+                className="
                     h-3
                     w-3
                     rounded-full
                     bg-blue-600
                     "
-                  />
+              />
 
-
-                  <div
-                    className="
+              <div
+                className="
                     flex-1
                     w-px
                     bg-blue-600
                     "
-                  />
+              />
+            </div>
 
-
-                </div>
-
-
-
-                <div>
-
-
-                  <p
-                    className="
+            <div>
+              <p
+                className="
                     text-blue-600
                     font-black
                     text-xs
                     "
-                  >
+              >
+                {formatPosterDate(item.eventDate)}
+              </p>
 
-                    {
-                      formatPosterDate(
-                        item.date
-                      )
-                    }
-
-                  </p>
-
-
-                  <p
-                    className="
+              <p
+                className="
                     text-xs
                     leading-relaxed
                     "
-                  >
-
-                    {
-                      upper(
-                        item.description
-                      )
-                    }
-
-                  </p>
-
-
-                </div>
-
-
-              </div>
-
-            )
-          )
-        }
-
-
+              >
+                {upper(item.description)}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-
-
     </section>
-
   );
-
 }
-
 
 export default PosterTimeline;

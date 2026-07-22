@@ -1,13 +1,14 @@
 export function adaptBulletin(bulletin) {
   if (!bulletin) return null;
 
-  const internationalRecord = bulletin.records?.find(
-    (r) => r.country && r.country.toUpperCase() !== "CHILE"
-  );
-
-  const chileRecord = bulletin.records?.find(
-    (r) => r.country?.toUpperCase() === "CHILE"
-  );
+  const records = (bulletin.records ?? []).map((record) => ({
+    type:
+      record.country?.toUpperCase() === "CHILE"
+        ? "chile"
+        : "international",
+    country: record.country,
+    description: record.description,
+  }));
 
   const flight = bulletin.flights?.[0];
 
@@ -23,8 +24,10 @@ export function adaptBulletin(bulletin) {
     // DATOS PERSONALES
     firstName: bulletin.first_name,
     lastName: bulletin.last_name,
+    alias: bulletin.alias ?? "",
     nationality: bulletin.nationality,
     birthDate: bulletin.birth_date,
+    age: bulletin.age,
     gender: bulletin.gender,
     documentType: bulletin.document_type,
     documentNumber: bulletin.document_number,
@@ -35,27 +38,30 @@ export function adaptBulletin(bulletin) {
     // RESOLUCIÓN
     resolutionNumber: bulletin.resolution_number,
     resolutionDate: bulletin.resolution_date,
-    resolutionAuthority: bulletin.resolution_authority,
+    issuingService:
+      bulletin.resolution_service ?? "",
 
     // ANTECEDENTES
-    hasInternationalRecord: !!internationalRecord,
-    internationalCountry: internationalRecord?.country ?? "",
-    internationalRecord: internationalRecord?.description ?? "",
-
-    hasChileRecord: !!chileRecord,
-    chileRecord: chileRecord?.description ?? "",
+    showRecords: records.length > 0,
+    records,
 
     // TIMELINE
-    timeline: bulletin.timeline ?? [],
+    timeline:
+      (bulletin.timeline ?? []).map((item) => ({
+        eventDate: item.event_date,
+        description: item.description,
+      })),
 
     // VUELO
-    hasFlight: !!flight,
+    showFlight: !!flight,
 
-    airline: flight?.airline ?? "",
-    flightNumber: flight?.flight_number ?? "",
-    departureDate: flight?.departure_date ?? "",
-    departureTime: flight?.departure_time ?? "",
-    departureAirport: flight?.departure_airport ?? "",
-    destination: flight?.destination ?? "",
+    flight: {
+      airline: flight?.airline ?? "",
+      flightNumber: flight?.flight_number ?? "",
+      origin: flight?.origin ?? "",
+      destination: flight?.destination ?? "",
+      departure: flight?.departure ?? "",
+      arrival: flight?.arrival ?? "",
+    },
   };
 }

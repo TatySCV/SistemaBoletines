@@ -33,7 +33,10 @@ function BulletinEditor() {
 
       // 2. DESCARGAR JPG GRANDE
 
-      await exportPosterJPG(exportRef.current);
+      await exportPosterJPG(
+  exportRef.current,
+  `${values.firstName}-${values.lastName}`
+);
 
       alert("Boletín generado correctamente");
     } catch (error) {

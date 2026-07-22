@@ -1,53 +1,26 @@
 import html2canvas from "html2canvas";
 
+export async function exportPosterJPG(
+  element,
+  fileName = `boletin-${Date.now()}`
+) {
+  if (!element) return;
 
-export async function exportPosterJPG(element) {
+  const canvas = await html2canvas(element, {
+    scale: 3,
+    backgroundColor: "#ffffff",
+    useCORS: true,
+  });
 
+  const image = canvas.toDataURL(
+    "image/jpeg",
+    1
+  );
 
-  if (!element) {
-    return;
-  }
+  const link = document.createElement("a");
 
-
-
-  const canvas =
-    await html2canvas(
-      element,
-      {
-        scale: 3,
-        backgroundColor: "#ffffff",
-        useCORS: true,
-      }
-    );
-
-
-
-  const image =
-    canvas.toDataURL(
-      "image/jpeg",
-      1
-    );
-
-
-
-  const link =
-    document.createElement(
-      "a"
-    );
-
-
-
-  link.href =
-    image;
-
-
-
-  link.download =
-    `boletin-${Date.now()}.jpg`;
-
-
+  link.href = image;
+  link.download = `${fileName}.jpg`;
 
   link.click();
-
-
 }
